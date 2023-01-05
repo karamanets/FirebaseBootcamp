@@ -9,10 +9,15 @@ import SwiftUI
 import Firebase
 
 struct MainView: View {
+    
     var body: some View {
         VStack {
             
-            SignInView()
+          
+                SignInView()
+                
+            
+            
         }
     }
 }

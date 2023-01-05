@@ -10,10 +10,17 @@ import Firebase
 
 struct SignInView: View {
     
+   
+    
     @State private var signInLog  = ""
     @State private var signInPass = ""
     
     @State private var sheet = false
+    
+    @State private var alert = false
+    @State private var alertMessage = ""
+    
+    @State private var home = false
     
     var body: some View {
         
@@ -49,7 +56,20 @@ struct SignInView: View {
             .padding()
             
             Button {
-                //
+                AuthService.shared.SingIn(user: self.signInLog, password: self.signInPass) { result in
+                    
+                    switch result {
+                        
+                    case .success(_):
+                        self.home.toggle()
+                    case .failure(let error):
+                        self.alertMessage = "Error \(error.localizedDescription)"
+                        self.alert.toggle()
+                        
+                        self.signInLog  = ""
+                        self.signInPass = ""
+                    }
+                }
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
@@ -85,20 +105,12 @@ struct SignInView: View {
             .sheet(isPresented: $sheet) {
                 SingUpView()
             }
-        }
-    }
-//    func login() {
-//        Auth.auth().signIn(withEmail: <#T##String#>, password: <#T##String#>)
-//    }
-    
-    func registr() {
-        Auth.auth().createUser(withEmail: signInLog, password: signInPass) { resalt, error in
-            if error != nil {
-                print(error!.localizedDescription)
+            .alert(isPresented: $alert) {
+                Alert(title: Text("\(alertMessage) 🦉"),
+                      dismissButton: .default(Text("Ok")) )
             }
         }
     }
-    
 }
 //                   🔱
 struct SignInView_Previews: PreviewProvider {

@@ -32,9 +32,4 @@ struct CustomTextField: TextFieldStyle {
         }
     }
 }
-//                    🔱
-struct CustomTextField_Previews: PreviewProvider {
-    static var previews: some View {
-        SignInView()
-    }
-}
+
