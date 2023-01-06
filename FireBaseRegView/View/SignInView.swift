@@ -10,7 +10,8 @@ import Firebase
 
 struct SignInView: View {
     
-   
+    @ObservedObject var showHome = AuthorizationModel()
+    @State private var show = false
     
     @State private var signInLog  = ""
     @State private var signInPass = ""
@@ -20,7 +21,6 @@ struct SignInView: View {
     @State private var alert = false
     @State private var alertMessage = ""
     
-    @State private var home = false
     
     var body: some View {
         
@@ -61,7 +61,8 @@ struct SignInView: View {
                     switch result {
                         
                     case .success(_):
-                        self.home.toggle()
+                        
+                        self.showHome.showHome.toggle()
                     case .failure(let error):
                         self.alertMessage = "Error \(error.localizedDescription)"
                         self.alert.toggle()
@@ -70,6 +71,7 @@ struct SignInView: View {
                         self.signInPass = ""
                     }
                 }
+                
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
@@ -109,6 +111,11 @@ struct SignInView: View {
                 Alert(title: Text("\(alertMessage) 🦉"),
                       dismissButton: .default(Text("Ok")) )
             }
+            .fullScreenCover(isPresented: $showHome.showHome) {
+                let user = UserViewModel(user: AuthService.shared.currentUser!)
+                HomeView(vm: user )
+            }
+            
         }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C535A66296864830044E8FD /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C535A65296864830044E8FD /* Authorization.swift */; };
 		2C58EB6B2965A980008E4EF5 /* FireBaseRegViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C58EB6A2965A980008E4EF5 /* FireBaseRegViewApp.swift */; };
 		2C58EB6D2965A980008E4EF5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C58EB6C2965A980008E4EF5 /* MainView.swift */; };
 		2C58EB6F2965A981008E4EF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C58EB6E2965A981008E4EF5 /* Assets.xcassets */; };
@@ -20,10 +21,11 @@
 		2C58EB862965CD90008E4EF5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2C58EB852965CD90008E4EF5 /* FirebaseAuth */; };
 		2C58EB882965CD90008E4EF5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2C58EB872965CD90008E4EF5 /* FirebaseFirestore */; };
 		2CD9E28D2966F0AB00351F1F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9E28C2966F0AB00351F1F /* AuthService.swift */; };
-		2CD9E29529671D2E00351F1F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9E29429671D2E00351F1F /* HomeViewModel.swift */; };
+		2CD9E29529671D2E00351F1F /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9E29429671D2E00351F1F /* UserViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C535A65296864830044E8FD /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		2C58EB672965A980008E4EF5 /* FireBaseRegView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireBaseRegView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C58EB6A2965A980008E4EF5 /* FireBaseRegViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseRegViewApp.swift; sourceTree = "<group>"; };
 		2C58EB6C2965A980008E4EF5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -35,7 +37,7 @@
 		2C58EB7E2965C02B008E4EF5 /* SingUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpView.swift; sourceTree = "<group>"; };
 		2C58EB802965C93F008E4EF5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2CD9E28C2966F0AB00351F1F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		2CD9E29429671D2E00351F1F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		2CD9E29429671D2E00351F1F /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C535A67296865600044E8FD /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				2C58EB7C2965AD98008E4EF5 /* CustomTextField.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
 		2C58EB5E2965A980008E4EF5 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +86,7 @@
 				2CD9E2902966F13800351F1F /* ViewModel */,
 				2CD9E2912966F15800351F1F /* Model */,
 				2CD9E28F2966F0E700351F1F /* Services */,
+				2C535A67296865600044E8FD /* Custom */,
 				2CD9E2932966F23D00351F1F /* Assets */,
 				2C58EB702965A981008E4EF5 /* Preview Content */,
 				2C58EB802965C93F008E4EF5 /* GoogleService-Info.plist */,
@@ -113,8 +124,7 @@
 		2CD9E2902966F13800351F1F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				2C58EB7C2965AD98008E4EF5 /* CustomTextField.swift */,
-				2CD9E29429671D2E00351F1F /* HomeViewModel.swift */,
+				2CD9E29429671D2E00351F1F /* UserViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -122,6 +132,7 @@
 		2CD9E2912966F15800351F1F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2C535A65296864830044E8FD /* Authorization.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -225,8 +236,9 @@
 				2C58EB6D2965A980008E4EF5 /* MainView.swift in Sources */,
 				2C58EB6B2965A980008E4EF5 /* FireBaseRegViewApp.swift in Sources */,
 				2C58EB7F2965C02B008E4EF5 /* SingUpView.swift in Sources */,
-				2CD9E29529671D2E00351F1F /* HomeViewModel.swift in Sources */,
+				2CD9E29529671D2E00351F1F /* UserViewModel.swift in Sources */,
 				2C58EB7B2965AAF8008E4EF5 /* SignInView.swift in Sources */,
+				2C535A66296864830044E8FD /* Authorization.swift in Sources */,
 				2C58EB7D2965AD98008E4EF5 /* CustomTextField.swift in Sources */,
 				2CD9E28D2966F0AB00351F1F /* AuthService.swift in Sources */,
 			);

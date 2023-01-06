@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseAuth
 
-class HomeViewModel: ObservableObject {
+class UserViewModel: ObservableObject {
     
     @Published var user : User
     
@@ -16,3 +16,5 @@ class HomeViewModel: ObservableObject {
         self.user = user
     }
 }
+
+

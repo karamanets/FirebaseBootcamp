@@ -7,7 +7,13 @@
 
 import SwiftUI
 
+
 struct HomeView: View {
+    
+    @Environment(\.dismiss) var goBack
+    
+    var vm: UserViewModel
+    var showHome = AuthorizationModel()
     
     let someRandomImage = URL(string: "https://picsum.photos/400")
     
@@ -33,14 +39,26 @@ struct HomeView: View {
                     @unknown default:
                         ProgressView()
                     }
-                } .navigationTitle("Hello")
+                }
+                .navigationTitle("Hello")
+                .toolbar {
+                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
+                        Button {
+                            self.showHome.showHome.toggle()
+                            goBack()
+                        } label: {
+                            Text("Log out")
+                        }
+                    }
+                }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 //                      🔱
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        MainView()
     }
 }

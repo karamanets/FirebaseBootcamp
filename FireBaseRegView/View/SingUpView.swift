@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SingUpView: View {
     
+    @ObservedObject var showHome = AuthorizationModel()
     
     @State private var signUpLog  = ""
     @State private var signUpPass = ""
@@ -88,6 +89,10 @@ struct SingUpView: View {
                             self.signUpPass = ""
                             self.signUpPassConfirm = ""
                             
+                            DispatchQueue.main.async {
+                                self.showHome.showHome.toggle()
+                            }
+                            
                         case .failure(let error):
                             self.alertMessage = "Error \(error.localizedDescription)"
                             self.alert.toggle()
@@ -115,6 +120,13 @@ struct SingUpView: View {
                 Alert(title: Text("\(alertMessage) 📌"),
                       dismissButton: .default(Text("Ok")) { goBack() } )
             }
+//            .fullScreenCover(isPresented: $showHome.showHome) {
+//                
+//                let user = UserViewModel(user: AuthService.shared.currentUser!)
+//                
+//                HomeView(vm: user)
+//            }
+            
         }
     }
 }
