@@ -15,7 +15,8 @@ struct SingUpView: View {
     @State private var signUpPass = ""
     @State private var signUpPassConfirm = ""
     @State private var alert = false
-    @State private var alertMessage = ""
+    @State private var message = ""
+    @State private var dialog = false
     
     @Environment(\.dismiss) var goBack
     
@@ -83,26 +84,23 @@ struct SingUpView: View {
                                               passwprd: self.signUpPass) { result in
                         switch result {
                         case .success(let user):
-                            self.alertMessage = "Congratulations you have an Account! You're email is : \(user.email!)"
+                            self.message = "Congratulations you have an Account! You're email is : \(user.email!)"
                             self.alert.toggle()
                             self.signUpLog = ""
                             self.signUpPass = ""
                             self.signUpPassConfirm = ""
-                            
-                            DispatchQueue.main.async {
-                                self.showHome.showHome.toggle()
-                            }
-                            
                         case .failure(let error):
-                            self.alertMessage = "Error \(error.localizedDescription)"
-                            self.alert.toggle()
+                            self.message = "\(error.localizedDescription)"
+                            self.dialog.toggle()
                             self.signUpPass = ""
                             self.signUpPassConfirm = ""
                         }
                     }
                 } else {
-                    self.alertMessage = "Error"
-                    self.alert.toggle()
+                    self.message = "Error"
+                    self.dialog.toggle()
+                    self.signUpPass = ""
+                    self.signUpPassConfirm = ""
                 }
             } label: {
                 ZStack {
@@ -115,18 +113,20 @@ struct SingUpView: View {
                 }
             }
             .padding(.top, 85)
-            
-            .alert(isPresented: $alert) {
-                Alert(title: Text("\(alertMessage) 📌"),
-                      dismissButton: .default(Text("Ok")) { goBack() } )
+        }
+        .alert(isPresented: $alert) {
+            Alert(title: Text("\(message) 📌"),
+                  dismissButton: .default(Text("Ok")) {
+                goBack()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { self.showHome.showHome.toggle() } })
+        }
+        .confirmationDialog("\(message)", isPresented: $dialog, titleVisibility: .visible) {
+            Button("Go Back", role: .destructive) {
+                self.signUpLog = ""
+                self.signUpPass = ""
+                self.signUpPassConfirm = ""
+                goBack()
             }
-//            .fullScreenCover(isPresented: $showHome.showHome) {
-//                
-//                let user = UserViewModel(user: AuthService.shared.currentUser!)
-//                
-//                HomeView(vm: user)
-//            }
-            
         }
     }
 }

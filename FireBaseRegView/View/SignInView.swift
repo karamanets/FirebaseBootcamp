@@ -10,6 +10,8 @@ import Firebase
 
 struct SignInView: View {
     
+    @Environment(\.dismiss) var goBack
+    
     @ObservedObject var showHome = AuthorizationModel()
     @State private var show = false
     
@@ -61,8 +63,8 @@ struct SignInView: View {
                     switch result {
                         
                     case .success(_):
-                        
                         self.showHome.showHome.toggle()
+                        
                     case .failure(let error):
                         self.alertMessage = "Error \(error.localizedDescription)"
                         self.alert.toggle()
@@ -105,7 +107,7 @@ struct SignInView: View {
             .padding()
             
             .sheet(isPresented: $sheet) {
-                SingUpView()
+                SingUpView(showHome: self.showHome)
             }
             .alert(isPresented: $alert) {
                 Alert(title: Text("\(alertMessage) 🦉"),
@@ -113,7 +115,7 @@ struct SignInView: View {
             }
             .fullScreenCover(isPresented: $showHome.showHome) {
                 let user = UserViewModel(user: AuthService.shared.currentUser!)
-                HomeView(vm: user )
+                HomeView(vm: user)
             }
             
         }
