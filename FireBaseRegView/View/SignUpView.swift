@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SingUpView: View {
+struct SignUpView: View {
     
     @ObservedObject var showHome = AuthorizationModel()
     
@@ -47,7 +47,7 @@ struct SingUpView: View {
                     Spacer(minLength: 0)
                 }
                 TextField("Enter Youre Username", text: $signUpLog)
-                    .textFieldStyle(CustomTextField(icon: "person", colorleft: .blue, colorRight: .mint))
+                    .textFieldStyle(CustomTextField(icon: "person", colorLeft: .blue, colorRight: .mint))
             }
             .padding(.top)
             
@@ -60,7 +60,7 @@ struct SingUpView: View {
                     Spacer(minLength: 0)
                 }
                 SecureField("Enter Youre password", text: $signUpPass)
-                    .textFieldStyle(CustomTextField(icon: "key", colorleft: .blue, colorRight: .mint))
+                    .textFieldStyle(CustomTextField(icon: "key", colorLeft: .blue, colorRight: .mint))
             }
             .padding(.top)
             
@@ -73,15 +73,14 @@ struct SingUpView: View {
                     Spacer(minLength: 0)
                 }
                 SecureField("Confirm password", text: $signUpPassConfirm)
-                    .textFieldStyle(CustomTextField(icon: "key", colorleft: .blue, colorRight: .mint))
+                    .textFieldStyle(CustomTextField(icon: "key", colorLeft: .blue, colorRight: .mint))
             }
             .padding(.top)
             
             Button {
                 if signUpPass == signUpPassConfirm {
                     
-                    AuthService.shared.SingUP(user: self.signUpLog,
-                                              passwprd: self.signUpPass) { result in
+                    AuthService.shared.SignUp(name: self.signUpLog, password: self.signUpPass) { result in
                         switch result {
                         case .success(let user):
                             self.message = "Congratulations you have an Account! You're email is : \(user.email!)"
@@ -112,7 +111,7 @@ struct SingUpView: View {
                         .font(.system(size: 19))
                 }
             }
-            .padding(.top, 85)
+            .padding(.top, 30)
         }
         .alert(isPresented: $alert) {
             Alert(title: Text("\(message) 📌"),
@@ -134,6 +133,6 @@ struct SingUpView: View {
 //                    🔱
 struct SingUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SingUpView()
+        SignUpView()
     }
 }

@@ -40,7 +40,7 @@ struct SignInView: View {
                     Spacer(minLength: 0)
                 }
                 TextField("Enter Youre Username", text: $signInLog)
-                    .textFieldStyle(CustomTextField(icon: "person", colorleft: .blue, colorRight: .mint))
+                    .textFieldStyle(CustomTextField(icon: "person", colorLeft: .blue, colorRight: .mint))
             }
             .padding(.horizontal)
             
@@ -53,12 +53,12 @@ struct SignInView: View {
                     Spacer(minLength: 0)
                 }
                 SecureField("Enter Youre password", text: $signInPass)
-                    .textFieldStyle(CustomTextField(icon: "key", colorleft: .blue, colorRight: .mint))
+                    .textFieldStyle(CustomTextField(icon: "key", colorLeft: .blue, colorRight: .mint))
             }
             .padding()
             
             Button {
-                AuthService.shared.SingIn(user: self.signInLog, password: self.signInPass) { result in
+                AuthService.shared.SignIn(name: self.signInLog, password: self.signInPass) { result in
                     
                     switch result {
                         
@@ -107,7 +107,7 @@ struct SignInView: View {
             .padding()
             
             .sheet(isPresented: $sheet) {
-                SingUpView(showHome: self.showHome)
+                SignUpView(showHome: self.showHome)
             }
             .alert(isPresented: $alert) {
                 Alert(title: Text("\(alertMessage) 🦉"),
