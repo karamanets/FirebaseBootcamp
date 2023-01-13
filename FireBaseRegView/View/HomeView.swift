@@ -10,18 +10,29 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @Environment(\.dismiss) var goBack
+   @StateObject var db: UserDBViewModel
+   @Environment(\.dismiss) var goBack
     
-    var vm: UserViewModel
     var showHome = AuthorizationModel()
-    
-    let someRandomImage = URL(string: "https://picsum.photos/400")
-    
+
     var body: some View {
         
-        NavigationStack {
+        VStack {
+            HStack {
+                Button {
+                    self.showHome.showHome.toggle()
+                    goBack()
+                } label: {
+                    Text("Log out")
+                        .foregroundColor(.blue)
+                        .font(.system(size: 19).monospaced())
+                }
+                Spacer()
+            }
+            .padding()
+            
             VStack {
-                AsyncImage(url: someRandomImage) { image in
+                AsyncImage(url: db.someRandomImage) { image in
                     switch image {
                         
                     case .empty:
@@ -40,25 +51,43 @@ struct HomeView: View {
                         ProgressView()
                     }
                 }
-                .navigationTitle("Hello")
-                .toolbar {
-                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
-                        Button {
-                            self.showHome.showHome.toggle()
-                            goBack()
-                        } label: {
-                            Text("Log out")
-                        }
-                    }
+            }
+            VStack (alignment: .leading) {
+                VStack {
+                    Text("Hello,")
+                        .font(.system(size: 23).monospaced() .bold())
+                    TextField("Name", text: $db.userDB.name)
+                        .font(.system(size: 23).monospaced() .bold())
+                }
+                HStack {
+                    Text("Phone +38")
+                        .font(.system(size: 23).monospaced() .bold())
+                    TextField("Phone", value: $db.userDB.phone, format: .number)
+                        .font(.system(size: 23).monospaced() .bold())
+                }
+                HStack {
+                   Text("Address:")
+                        .font(.system(size: 23).monospaced() .bold())
+                    TextField("Address", text: $db.userDB.address)
+                        .font(.system(size: 23).monospaced() .bold())
                 }
             }
+            .padding()
         }
+        .padding(.bottom, 160)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(LinearGradient(colors: [.purple, .orange], startPoint: .bottomLeading, endPoint: .topTrailing))
+        .onSubmit {
+            db.setProfile()
+        }
+        .onAppear {
+            db.getProfile()
+        }
     }
 }
 //                      🔱
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        SignInView()
     }
 }

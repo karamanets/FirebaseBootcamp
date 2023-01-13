@@ -7,17 +7,17 @@
 
 import Foundation
 
-
 struct UserDB: Identifiable {
     
     var id: String
     var name: String
-    var phone: String
+    var phone: Int
     var address: String
     
     var representation: [String: Any] {
         
         var item = [String: Any]()
+        
         item["id"] = self.id
         item["name"] = self.name
         item["phone"] = self.phone

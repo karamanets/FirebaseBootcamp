@@ -13,23 +13,22 @@ struct SignInView: View {
     @Environment(\.dismiss) var goBack
     
     @ObservedObject var showHome = AuthorizationModel()
-    @State private var show = false
     
     @State private var signInLog  = ""
     @State private var signInPass = ""
-    
     @State private var sheet = false
-    
     @State private var alert = false
     @State private var alertMessage = ""
-    
-    
+
     var body: some View {
         
         VStack {
-            Text("Sign In")
-                .font(.system(size: 29) .bold())
-                .foregroundColor(.mint)
+            
+            VStack {
+                Text("Sign In")
+                    .font(.system(size: 29) .bold())
+                    .foregroundColor(.mint)
+            }
             
             VStack {
                 HStack {
@@ -39,7 +38,7 @@ struct SignInView: View {
                         .opacity(0.5)
                     Spacer(minLength: 0)
                 }
-                TextField("Enter Youre Username", text: $signInLog)
+                TextField("Enter You're Username", text: $signInLog)
                     .textFieldStyle(CustomTextField(icon: "person", colorLeft: .blue, colorRight: .mint))
             }
             .padding(.horizontal)
@@ -52,13 +51,13 @@ struct SignInView: View {
                         .opacity(0.5)
                     Spacer(minLength: 0)
                 }
-                SecureField("Enter Youre password", text: $signInPass)
+                SecureField("Enter You're password", text: $signInPass)
                     .textFieldStyle(CustomTextField(icon: "key", colorLeft: .blue, colorRight: .mint))
             }
             .padding()
             
             Button {
-                AuthService.shared.SignIn(name: self.signInLog, password: self.signInPass) { result in
+                AuthService.shared.SignIn(email: self.signInLog, password: self.signInPass) { result in
                     
                     switch result {
                         
@@ -73,7 +72,6 @@ struct SignInView: View {
                         self.signInPass = ""
                     }
                 }
-                
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
@@ -105,7 +103,6 @@ struct SignInView: View {
                     }
             }
             .padding()
-            
             .sheet(isPresented: $sheet) {
                 SignUpView(showHome: self.showHome)
             }
@@ -114,10 +111,11 @@ struct SignInView: View {
                       dismissButton: .default(Text("Ok")) )
             }
             .fullScreenCover(isPresented: $showHome.showHome) {
-                let user = UserViewModel(user: AuthService.shared.currentUser!)
-                HomeView(vm: user)
+                HomeView(db: UserDBViewModel(UserDB: UserDB(id: "",
+                                                            name: "",
+                                                            phone: 0,
+                                                            address: "")))
             }
-            
         }
     }
 }

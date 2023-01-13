@@ -14,14 +14,11 @@ struct CustomTextField: TextFieldStyle {
     let colorRight: Color
     
     func _body(configuration: TextField<Self._Label>) -> some View {
-        
         ZStack {
-            
             RoundedRectangle(cornerRadius: 20)
                 .stroke( LinearGradient(colors: [colorLeft, colorRight],
                                         startPoint: .bottomLeading, endPoint: .topTrailing))
                 .frame(width: 350, height: 50)
-            
             HStack{
                 Image(systemName: icon)
                     .foregroundColor(.secondary)
