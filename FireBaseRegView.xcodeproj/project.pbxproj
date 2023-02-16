@@ -28,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		2C1B26F529705EEA00F9AACE /* UserDBViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDBViewModel.swift; sourceTree = "<group>"; };
+		2C425571299BE256004F9D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C535A65296864830044E8FD /* AuthorizationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationData.swift; sourceTree = "<group>"; };
 		2C58EB672965A980008E4EF5 /* FireBaseRegView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FireBaseRegView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C58EB6A2965A980008E4EF5 /* FireBaseRegViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseRegViewApp.swift; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 				2CD9E2932966F23D00351F1F /* Assets */,
 				2C58EB702965A981008E4EF5 /* Preview Content */,
 				2C58EB802965C93F008E4EF5 /* GoogleService-Info.plist */,
+				2C425571299BE256004F9D28 /* Info.plist */,
 			);
 			path = FireBaseRegView;
 			sourceTree = "<group>";
@@ -379,7 +381,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FireBaseRegView/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = FireBaseRegView/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -406,7 +408,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FireBaseRegView/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = FireBaseRegView/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

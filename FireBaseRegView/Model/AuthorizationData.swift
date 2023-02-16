@@ -9,7 +9,6 @@ import Foundation
 
 class AuthorizationModel: ObservableObject {
     
-    
     @Published var showHome = false {
         
         didSet {

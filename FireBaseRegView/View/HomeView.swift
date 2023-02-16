@@ -20,6 +20,7 @@ struct HomeView: View {
         VStack {
             HStack {
                 Button {
+                    AuthService.shared.signOut()
                     self.showHome.showHome.toggle()
                     goBack()
                 } label: {

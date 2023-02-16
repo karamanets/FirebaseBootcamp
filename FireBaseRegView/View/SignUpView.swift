@@ -32,11 +32,13 @@ struct SignUpView: View {
                 }
                 .offset(x: -160, y: -85)
             }
+            
             VStack {
                 Text("Sign Up")
                     .font(.system(size: 29) .bold())
                     .foregroundColor(.mint)
             }
+            
             VStack {
                 HStack {
                     Text("Username")
@@ -49,6 +51,7 @@ struct SignUpView: View {
                     .textFieldStyle(CustomTextField(icon: "person", colorLeft: .blue, colorRight: .mint))
             }
             .padding(.top)
+            
             VStack {
                 HStack {
                     Text("Password")
@@ -61,6 +64,7 @@ struct SignUpView: View {
                     .textFieldStyle(CustomTextField(icon: "key", colorLeft: .blue, colorRight: .mint))
             }
             .padding(.top)
+            
             VStack {
                 HStack {
                     Text("Password")
@@ -73,6 +77,7 @@ struct SignUpView: View {
                     .textFieldStyle(CustomTextField(icon: "key", colorLeft: .blue, colorRight: .mint))
             }
             .padding(.top)
+            
             Button {
                 if signUpPass == signUpPassConfirm {
                     AuthService.shared.SignUp(email: self.signUpLog, password: self.signUpPass) { result in
