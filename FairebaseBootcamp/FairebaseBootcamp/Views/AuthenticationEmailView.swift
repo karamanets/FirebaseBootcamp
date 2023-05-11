@@ -28,6 +28,7 @@ struct AuthenticationEmailView: View {
             /// Check signIn user or not
             let authUser = try? AuthManagerEmail.shared.getAuthenticatedUser()
             vm.user = authUser
+            vm.email = authUser?.email ?? "" /// for reset func
             vm.isSignIn = authUser == nil ? false : true
         }
     }

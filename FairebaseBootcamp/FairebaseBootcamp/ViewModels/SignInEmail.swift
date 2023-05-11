@@ -18,21 +18,22 @@ final class SignInEmail: ObservableObject {
     @Published var isSignIn = false
     @Published var user: AuthManagerEmailModel? = nil
     
-    func signUp() {
+    func signUp() async throws {
+        /// Validation
         guard !email.isEmpty, !password.isEmpty else { return }
         
-        Task {
-            do {
-                let returnResult = try await AuthManagerEmail.shared.createUser(email: email, password: password)
-                user = returnResult
-                alert.toggle()
-                alertMessage = "[🔥] Success user email is: \(returnResult.email ?? "")"
-                
-            } catch {
-                alert.toggle()
-                alertMessage = "[🔥] Error"
-            }
-        }
+        let returnResult = try await AuthManagerEmail.shared.createUser(email: email, password: password)
+        user = returnResult
+        alert.toggle()
+        alertMessage = "[🔥] Success user email is: \(returnResult.email ?? "")"
+    }
+    
+    func signIn() async throws {
+        /// Validation
+        guard !email.isEmpty, !password.isEmpty else { return }
+        
+        let returnResult = try await AuthManagerEmail.shared.signIn(email: email, password: password)
+        user = returnResult
     }
     
     func logOut() throws {
@@ -42,6 +43,10 @@ final class SignInEmail: ObservableObject {
     func isUserExist() throws -> AuthManagerEmailModel {
         let user = try AuthManagerEmail.shared.getAuthenticatedUser()
         return user
+    }
+    
+    func resetPassword() async throws {
+        try await AuthManagerEmail.shared.resetPassword(email: email)
     }
     
 }

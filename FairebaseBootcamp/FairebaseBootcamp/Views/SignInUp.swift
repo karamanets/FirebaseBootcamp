@@ -14,6 +14,69 @@ struct SignInUp: View {
     var body: some View {
         VStack {
             label
+            
+            emailAndEmailField
+            
+            Button {
+                /// If email NOT exist in firebase -> signUp
+                Task {
+                    do {
+                        try await vm.signUp()
+                        return
+                    } catch let error {
+                        print("[⚠️] Error: \(error.localizedDescription)")
+                    }
+                }
+                /// If email exist in firebase -> signIn
+                Task {
+                    do {
+                        try await vm.signIn()
+                        withAnimation(.spring()) {
+                            guard vm.user != nil else { return }
+                            vm.isSignIn = true
+                        }
+                    } catch let error {
+                        print("[⚠️] Error: \(error.localizedDescription)")
+                    }
+                }
+            } label: { buttonView }
+                .padding(.top, 35)
+                .alert(isPresented: $vm.alert) {
+                    Alert(title: Text("\(vm.alertMessage) 🦉"),
+                          message: Text(""),
+                          dismissButton: .default(Text("Ok")) {
+                        
+                        guard vm.user != nil else { return }
+                        
+                        withAnimation(.spring()) {
+                            vm.isSignIn = true
+                        }
+                    })
+                }
+        }
+    }
+}
+
+//               🔱
+struct SignInUp_Previews: PreviewProvider {
+    static var previews: some View {
+        SignInUp(vm: SignInEmail())
+    }
+}
+
+//MARK: Component
+extension SignInUp {
+    
+    /// Sign In Label
+    private var label: some View {
+        Text("Sign In/Up")
+            .font(.system(size: 29) .bold())
+            .foregroundColor(.mint)
+    }
+    
+    /// Email Field
+    private var emailAndEmailField: some View {
+        VStack {
             VStack {
                 HStack {
                     Text("Username")
@@ -39,67 +102,20 @@ struct SignInUp: View {
                     .textFieldStyle(CustomTextField(icon: "key", colorLeft: .blue, colorRight: .mint))
             }
             .padding()
-            
-            Button {
-                vm.signUp()
-            } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 30)
-                        .fill(.mint)
-                        .frame(width: 260, height: 60)
-                    Text("Sign In")
-                        .foregroundColor(.white)
-                        .font(.system(size: 19))
-                }
-            }
-            .padding(.top, 35)
-            signUpInfo
-                .alert(isPresented: $vm.alert) {
-                    Alert(title: Text("\(vm.alertMessage) 🦉"),
-                          message: Text(""),
-                          dismissButton: .default(Text("Ok")) {
-                        guard vm.user != nil else { return }
-                        withAnimation(.spring()) {
-                            vm.isSignIn = true
-                        }
-                    })
-                }
         }
     }
-}
-
-//               🔱
-struct SignInUp_Previews: PreviewProvider {
-    static var previews: some View {
-        SignInUp(vm: SignInEmail())
-    }
-}
-
-/// Sign In Label
-private var label: some View {
-    Text("Sign In")
-        .font(.system(size: 29) .bold())
-        .foregroundColor(.mint)
-}
-
-/// Sign Up info
-private var signUpInfo: some View {
-    VStack {
-        Text("OR")
-            .font(.system(size: 19))
-            .foregroundColor(.secondary)
-            .padding(.top)
-        
-        HStack {
-            Text("Don't Have An Account?")
+    
+    /// Button View
+    private var buttonView: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 30)
+                .fill(.mint)
+                .frame(width: 260, height: 60)
+            Text("Sign In")
+                .foregroundColor(.white)
                 .font(.system(size: 19))
-                .foregroundColor(.secondary)
-            
-            Text("Sign Up")
-                .foregroundColor(.blue)
-                .font(.system(size: 19) .bold())
-            
         }
-        .padding()
     }
 }
+
+

@@ -12,22 +12,8 @@ struct ProfileView: View {
     @ObservedObject var vm: SignInEmail
     
     var body: some View {
-            VStack {
-                Button {
-                    Task {
-                        do {
-                            try vm.logOut()
-                            withAnimation(.spring()) {
-                                vm.isSignIn = false
-                            }
-                        } catch {
-                            print("[⚠️] Error logOut")
-                        }
-                    }
-                } label: {
-                    Text("SignOut")
-                }
-                .buttonMode()
+            List {
+                emailAuth
             }
     }
 }
@@ -41,3 +27,44 @@ struct SomeView_Previews: PreviewProvider {
     }
 }
 
+//MARK: Components
+extension ProfileView {
+    
+    private var emailAuth: some View {
+        Section {
+            /// LogOut
+            Button {
+                Task {
+                    do {
+                        try vm.logOut()
+                        withAnimation(.spring()) {
+                            vm.isSignIn = false
+                            vm.user = nil
+                        }
+                    } catch {
+                        print("[⚠️] Error logOut")
+                    }
+                }
+            } label: {
+                Text("SignOut")
+            }
+            
+            ///Reset Password
+            Button {
+                Task {
+                    do {
+                        try await vm.resetPassword()
+                        print("[⚠️] Reset Success")
+                    } catch {
+                        print("[⚠️] Error Reset")
+                    }
+                }
+            } label: {
+                Text("Reset Password")
+            }
+            
+        } header: {
+            Text("Email Auth")
+        }
+    }
+}
