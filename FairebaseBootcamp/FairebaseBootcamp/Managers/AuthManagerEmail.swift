@@ -14,11 +14,25 @@ final class AuthManagerEmail {
     
     private init() {}
     
+    /// Create user with email
     func createUser(email: String, password: String) async throws -> AuthManagerEmailModel {
         
         let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
         
         return AuthManagerEmailModel(user: authResult.user)
+    }
+    
+    /// Get user authenticated or not (is not async just local)
+    func getAuthenticatedUser() throws -> AuthManagerEmailModel {
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.badServerResponse)
+        }
+        return AuthManagerEmailModel(user: user)
+    }
+    
+    /// Sign Out (is not async just local)
+    func signOut() throws {
+       try Auth.auth().signOut()
     }
 }
 

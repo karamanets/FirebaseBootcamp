@@ -15,7 +15,7 @@ struct FairebaseBootcampApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AuthenticationEmailView()
+            RootView()
         }
     }
 }

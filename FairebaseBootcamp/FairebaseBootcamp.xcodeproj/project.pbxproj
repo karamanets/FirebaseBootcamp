@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C2AE16D2A0BCB9300D07F7F /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2AE16C2A0BCB9300D07F7F /* CustomButtonStyle.swift */; };
+		2C2AE1712A0BD32300D07F7F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2AE1702A0BD32300D07F7F /* RootView.swift */; };
+		2C2AE1732A0BD50400D07F7F /* SignInUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2AE1722A0BD50400D07F7F /* SignInUp.swift */; };
 		2CE307CF2A0A88B400FB303C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2CE307CE2A0A88B400FB303C /* FirebaseAuth */; };
 		2CE307D22A0A8C1100FB303C /* TextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307D12A0A8C1100FB303C /* TextFieldStyle.swift */; };
-		2CE307D92A0A95A500FB303C /* SignInEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307D82A0A95A500FB303C /* SignInEmailViewModel.swift */; };
-		2CE307DB2A0A99F900FB303C /* SomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307DA2A0A99F900FB303C /* SomeView.swift */; };
+		2CE307D92A0A95A500FB303C /* SignInEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307D82A0A95A500FB303C /* SignInEmail.swift */; };
+		2CE307DB2A0A99F900FB303C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307DA2A0A99F900FB303C /* ProfileView.swift */; };
 		2CE307DF2A0A9C1B00FB303C /* AuthManagerEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307DE2A0A9C1B00FB303C /* AuthManagerEmail.swift */; };
 		2CE58F3D2A0A7ED1008682B4 /* FairebaseBootcampApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE58F3C2A0A7ED1008682B4 /* FairebaseBootcampApp.swift */; };
 		2CE58F3F2A0A7ED1008682B4 /* AuthenticationEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE58F3E2A0A7ED1008682B4 /* AuthenticationEmailView.swift */; };
@@ -22,9 +25,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C2AE16C2A0BCB9300D07F7F /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
+		2C2AE1702A0BD32300D07F7F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		2C2AE1722A0BD50400D07F7F /* SignInUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUp.swift; sourceTree = "<group>"; };
 		2CE307D12A0A8C1100FB303C /* TextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyle.swift; sourceTree = "<group>"; };
-		2CE307D82A0A95A500FB303C /* SignInEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailViewModel.swift; sourceTree = "<group>"; };
-		2CE307DA2A0A99F900FB303C /* SomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeView.swift; sourceTree = "<group>"; };
+		2CE307D82A0A95A500FB303C /* SignInEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmail.swift; sourceTree = "<group>"; };
+		2CE307DA2A0A99F900FB303C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		2CE307DE2A0A9C1B00FB303C /* AuthManagerEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManagerEmail.swift; sourceTree = "<group>"; };
 		2CE58F392A0A7ED1008682B4 /* FairebaseBootcamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FairebaseBootcamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE58F3C2A0A7ED1008682B4 /* FairebaseBootcampApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FairebaseBootcampApp.swift; sourceTree = "<group>"; };
@@ -60,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				2CE307D12A0A8C1100FB303C /* TextFieldStyle.swift */,
+				2C2AE16C2A0BCB9300D07F7F /* CustomButtonStyle.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -67,7 +74,7 @@
 		2CE307D72A0A954A00FB303C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				2CE307D82A0A95A500FB303C /* SignInEmailViewModel.swift */,
+				2CE307D82A0A95A500FB303C /* SignInEmail.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -75,8 +82,10 @@
 		2CE307DC2A0A9B7E00FB303C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C2AE1702A0BD32300D07F7F /* RootView.swift */,
 				2CE58F3E2A0A7ED1008682B4 /* AuthenticationEmailView.swift */,
-				2CE307DA2A0A99F900FB303C /* SomeView.swift */,
+				2C2AE1722A0BD50400D07F7F /* SignInUp.swift */,
+				2CE307DA2A0A99F900FB303C /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -217,12 +226,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C2AE1732A0BD50400D07F7F /* SignInUp.swift in Sources */,
+				2C2AE1712A0BD32300D07F7F /* RootView.swift in Sources */,
 				2CE307D22A0A8C1100FB303C /* TextFieldStyle.swift in Sources */,
 				2CE307DF2A0A9C1B00FB303C /* AuthManagerEmail.swift in Sources */,
-				2CE307D92A0A95A500FB303C /* SignInEmailViewModel.swift in Sources */,
+				2CE307D92A0A95A500FB303C /* SignInEmail.swift in Sources */,
 				2CE58F3F2A0A7ED1008682B4 /* AuthenticationEmailView.swift in Sources */,
 				2CE58F3D2A0A7ED1008682B4 /* FairebaseBootcampApp.swift in Sources */,
-				2CE307DB2A0A99F900FB303C /* SomeView.swift in Sources */,
+				2C2AE16D2A0BCB9300D07F7F /* CustomButtonStyle.swift in Sources */,
+				2CE307DB2A0A99F900FB303C /* ProfileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
