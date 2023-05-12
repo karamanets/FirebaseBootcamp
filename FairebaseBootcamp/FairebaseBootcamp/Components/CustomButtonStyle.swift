@@ -41,3 +41,20 @@ extension View {
     }
 }
 
+//MARK: RootView button link style
+struct ButtonLink: ViewModifier {
+    
+    let color: Color
+    
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(.white)
+            .font(.system(size: 25) .bold())
+            .frame(maxWidth: .infinity)
+            .frame(height: 55)
+            .background(color)
+            .clipShape(RoundedRectangle(cornerRadius: 25))
+            .padding(.horizontal)
+            .shadow(color: color, radius: 10)
+    }
+}

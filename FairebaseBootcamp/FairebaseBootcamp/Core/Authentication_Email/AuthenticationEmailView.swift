@@ -18,7 +18,7 @@ struct AuthenticationEmailView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .transition(.move(edge: .leading))
             } else {
-                SignInUp(vm: vm)
+                SignInUpView(vm: vm)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .transition(.move(edge: .trailing))
             }
@@ -30,6 +30,7 @@ struct AuthenticationEmailView: View {
             vm.user = authUser
             vm.email = authUser?.email ?? "" /// for reset func
             vm.isSignIn = authUser == nil ? false : true
+            try? AuthManagerEmail.shared.getProvider()
         }
     }
 }

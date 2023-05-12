@@ -16,7 +16,7 @@ final class SignInEmail: ObservableObject {
     @Published var alert = false
     @Published var alertMessage = ""
     @Published var isSignIn = false
-    @Published var user: AuthManagerEmailModel? = nil
+    @Published var user: AuthManagerModel? = nil
     
     func signUp() async throws {
         /// Validation
@@ -40,7 +40,7 @@ final class SignInEmail: ObservableObject {
         try AuthManagerEmail.shared.signOut()
     }
 
-    func isUserExist() throws -> AuthManagerEmailModel {
+    func isUserExist() throws -> AuthManagerModel {
         let user = try AuthManagerEmail.shared.getAuthenticatedUser()
         return user
     }

@@ -1,5 +1,5 @@
 //
-//  SignInUp.swift
+//  SignInUpView.swift
 //  FairebaseBootcamp
 //
 //  Created by Alex Karamanets on 10/05/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignInUp: View {
+struct SignInUpView: View {
     
     @ObservedObject var vm: SignInEmail
     
@@ -60,12 +60,12 @@ struct SignInUp: View {
 //               🔱
 struct SignInUp_Previews: PreviewProvider {
     static var previews: some View {
-        SignInUp(vm: SignInEmail())
+        SignInUpView(vm: SignInEmail())
     }
 }
 
 //MARK: Component
-extension SignInUp {
+extension SignInUpView {
     
     /// Sign In Label
     private var label: some View {

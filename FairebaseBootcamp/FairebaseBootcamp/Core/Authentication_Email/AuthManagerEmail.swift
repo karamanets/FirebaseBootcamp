@@ -15,27 +15,27 @@ final class AuthManagerEmail {
     private init() {}
     
     ///📌 Create user with email
-    func createUser(email: String, password: String) async throws -> AuthManagerEmailModel {
+    func createUser(email: String, password: String) async throws -> AuthManagerModel {
         
         let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
         
-        return AuthManagerEmailModel(user: authResult.user)
+        return AuthManagerModel(user: authResult.user)
     }
     
     ///📌  SignIn -> if user already exist
-    func signIn(email: String, password: String) async throws -> AuthManagerEmailModel {
+    func signIn(email: String, password: String) async throws -> AuthManagerModel {
         
         let signInResult = try await Auth.auth().signIn(withEmail: email, password: password)
         
-        return AuthManagerEmailModel(user: signInResult.user)
+        return AuthManagerModel(user: signInResult.user)
     }
     
     ///📌  Get user authenticated or not (is not async just local)
-    func getAuthenticatedUser() throws -> AuthManagerEmailModel {
+    func getAuthenticatedUser() throws -> AuthManagerModel {
         guard let user = Auth.auth().currentUser else {
             throw URLError(.badServerResponse)
         }
-        return AuthManagerEmailModel(user: user)
+        return AuthManagerModel(user: user)
     }
     
     ///📌  Sign Out (is not async just local)
@@ -65,22 +65,17 @@ final class AuthManagerEmail {
         
         try await user.updatePassword(to: pass)
     }
-}
-
-//MARK: - 🔥 Model
-struct AuthManagerEmailModel {
     
-    let uid: String
-    let email: String?
-    let photoUrl: String?
-    
-    init(user: User) {
-        self.uid = user.uid
-        self.email = user.email
-        self.photoUrl = user.photoURL?.absoluteString
+    ///📌 User can use deferent Provider to signIn
+    func getProvider() throws {
+        guard let providerData = Auth.auth().currentUser?.providerData else {
+            throw URLError(.badServerResponse)
+        }
         
-        ///user.isAnonymous
-        ///user.phoneNumber
-        ///...
+        for provider in providerData {
+            print("[🔥] provider: \(provider.providerID)")
+        }
     }
 }
+
+
