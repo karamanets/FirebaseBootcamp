@@ -8,9 +8,9 @@
 import Foundation
 import FirebaseAuth
 
-final class AuthManagerEmail {
+final class AuthManager {
     
-    static let shared = AuthManagerEmail()
+    static let shared = AuthManager()
     
     private init() {}
     
@@ -67,15 +67,47 @@ final class AuthManagerEmail {
     }
     
     ///📌 User can use deferent Provider to signIn
-    func getProvider() throws {
+    func getProvider() throws -> [AuthProviderOptions] {
         guard let providerData = Auth.auth().currentUser?.providerData else {
             throw URLError(.badServerResponse)
         }
         
+        var providers: [AuthProviderOptions] = []
         for provider in providerData {
+            if let option = AuthProviderOptions(rawValue: provider.providerID) {
+                providers.append(option)
+            } else {
+                assertionFailure("[⚠️] Provider option not found: \(provider.providerID)")
+            }
             print("[🔥] provider: \(provider.providerID)")
         }
+        return providers
+    }
+    
+    ///📌 For SignIn Google and Apple
+    private func signIn(credential: AuthCredential) async throws -> AuthManagerModel  {
+        let authDataResult = try await Auth.auth().signIn(with: credential)
+        return AuthManagerModel(user: authDataResult.user)
+    }
+    
+    ///📌  Sign with Google
+    @discardableResult
+    func signInWithGoogle(tokens: GoogleSignInModel) async throws -> AuthManagerModel {
+        let credential = GoogleAuthProvider.credential(withIDToken: tokens.idToken, accessToken: tokens.accessToken)
+        return try await signIn(credential: credential)
+    }
+    
+    ///📌  Sign with Apple
+    @discardableResult
+    func signInWithApple(tokens: SignInWithResult) async throws -> AuthManagerModel {
+        let credential = OAuthProvider.credential(withProviderID: AuthProviderOptions.apple.rawValue , idToken: tokens.token, accessToken: tokens.nonce)
+        return try await signIn(credential: credential)
     }
 }
 
-
+//MARK: Providers
+enum AuthProviderOptions: String {
+    case email = "password"
+    case google = "google.com"
+    case apple = "apple.com"
+}

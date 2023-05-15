@@ -17,6 +17,6 @@ final class GoogleViewModel: ObservableObject {
     func signInGoogle() async throws {
         let helper = GoogleSignInHelper()
         let token = try await helper.signIn()
-        try await AuthenticationManager.shared.signInWithGoogle(tokens: token)
+        try await AuthManager.shared.signInWithGoogle(tokens: token)
     }
 }

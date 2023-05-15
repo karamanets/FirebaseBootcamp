@@ -25,6 +25,13 @@ struct RootView: View {
                     Text("Authentication with Google")
                         .modifier(ButtonLink(color: .purple))
                 }
+                
+                NavigationLink {
+                    SignInView_Apple()
+                } label: {
+                    Text("Authentication with Apple")
+                        .modifier(ButtonLink(color: .black))
+                }
             }
         }
     }

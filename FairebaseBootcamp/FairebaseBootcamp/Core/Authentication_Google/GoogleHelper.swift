@@ -19,7 +19,7 @@ final class GoogleSignInHelper {
     @MainActor
     func signIn() async throws -> GoogleSignInModel {
         /// Get top viewController
-        guard let topVC = topViewController() else {
+        guard let topVC = Utility.shared.topViewController() else {
             throw URLError(.cannotFindHost)
         }
             
@@ -39,28 +39,5 @@ final class GoogleSignInHelper {
         let tokens = GoogleSignInModel(idToken: idToken, accessToken: accessToken)
         
         return tokens
-    }
-    
-    /// UiKit component - get top viewController 
-    @MainActor
-    func topViewController(controller: UIViewController? = nil) -> UIViewController? {
-        
-        let controller = controller ?? UIApplication.shared.keyWindow?.rootViewController
-        
-        if let navigationController = controller as? UINavigationController {
-            return topViewController(controller: navigationController.visibleViewController)
-        }
-        
-        if let tabController = controller as? UITabBarController {
-            if let selected = tabController.selectedViewController {
-                return topViewController(controller: selected)
-            }
-        }
-        
-        if let presented = controller?.presentedViewController {
-            return topViewController(controller: presented)
-        }
-        
-        return controller
     }
 }

@@ -22,7 +22,7 @@ final class SignInEmail: ObservableObject {
         /// Validation
         guard !email.isEmpty, !password.isEmpty else { return }
         
-        let returnResult = try await AuthManagerEmail.shared.createUser(email: email, password: password)
+        let returnResult = try await AuthManager.shared.createUser(email: email, password: password)
         user = returnResult
         alert.toggle()
         alertMessage = "[🔥] Success user email is: \(returnResult.email ?? "")"
@@ -32,21 +32,21 @@ final class SignInEmail: ObservableObject {
         /// Validation
         guard !email.isEmpty, !password.isEmpty else { return }
         
-        let returnResult = try await AuthManagerEmail.shared.signIn(email: email, password: password)
+        let returnResult = try await AuthManager.shared.signIn(email: email, password: password)
         user = returnResult
     }
     
     func logOut() throws {
-        try AuthManagerEmail.shared.signOut()
+        try AuthManager.shared.signOut()
     }
 
     func isUserExist() throws -> AuthManagerModel {
-        let user = try AuthManagerEmail.shared.getAuthenticatedUser()
+        let user = try AuthManager.shared.getAuthenticatedUser()
         return user
     }
     
     func resetPassword() async throws {
-        try await AuthManagerEmail.shared.resetPassword(email: email)
+        try await AuthManager.shared.resetPassword(email: email)
     }
     
 }
