@@ -7,19 +7,17 @@
 
 import SwiftUI
 
-struct AuthenticationEmailView: View {
+struct SignInEmailRoot: View {
     
-    @StateObject private var vm = SignInEmail()
+    @StateObject private var vm = SignInEmailViewModel()
    
     var body: some View {
         ZStack {
             if vm.isSignIn {
                 ProfileView(vm: vm)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .transition(.move(edge: .leading))
             } else {
                 SignInUpView(vm: vm)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .transition(.move(edge: .trailing))
             }
             
@@ -30,7 +28,7 @@ struct AuthenticationEmailView: View {
             vm.user = authUser
             vm.email = authUser?.email ?? "" /// for reset func
             vm.isSignIn = authUser == nil ? false : true
-            try? AuthManager.shared.getProvider()
+            //try? AuthManager.shared.getProvider()
         }
     }
 }
@@ -39,7 +37,7 @@ struct AuthenticationEmailView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            AuthenticationEmailView()
+            SignInEmailRoot()
         }
     }
 }

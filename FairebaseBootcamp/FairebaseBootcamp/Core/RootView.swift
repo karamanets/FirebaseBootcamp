@@ -13,7 +13,14 @@ struct RootView: View {
             VStack (spacing: 20){
                 
                 NavigationLink {
-                    AuthenticationEmailView()
+                    SignInViewRoot()
+                } label: {
+                    Text("Authentication Anonymously")
+                        .modifier(ButtonLink(color: .orange))
+                }
+                
+                NavigationLink {
+                    SignInEmailRoot()
                 } label: {
                     Text("Authentication with Email")
                         .modifier(ButtonLink(color: .pink))

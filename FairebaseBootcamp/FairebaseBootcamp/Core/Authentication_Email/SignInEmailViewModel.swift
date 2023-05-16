@@ -1,5 +1,5 @@
 //
-//  SignInEmail.swift
+//  SignInEmailViewModel.swift
 //  FairebaseBootcamp
 //
 //  Created by Alex Karamanets on 09/05/2023.
@@ -9,7 +9,7 @@ import Foundation
 
 
 @MainActor
-final class SignInEmail: ObservableObject {
+final class SignInEmailViewModel: ObservableObject {
     
     @Published var email  = ""
     @Published var password = ""

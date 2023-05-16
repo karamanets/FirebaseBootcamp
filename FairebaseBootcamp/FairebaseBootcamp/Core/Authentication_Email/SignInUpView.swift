@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignInUpView: View {
     
-    @ObservedObject var vm: SignInEmail
+    @ObservedObject var vm: SignInEmailViewModel
     
     var body: some View {
         VStack {
@@ -60,7 +60,7 @@ struct SignInUpView: View {
 //               🔱
 struct SignInUp_Previews: PreviewProvider {
     static var previews: some View {
-        SignInUpView(vm: SignInEmail())
+        SignInUpView(vm: SignInEmailViewModel())
     }
 }
 
@@ -110,7 +110,8 @@ extension SignInUpView {
         ZStack {
             RoundedRectangle(cornerRadius: 30)
                 .fill(.mint)
-                .frame(width: 260, height: 60)
+                .frame(height: 60)
+                .frame(maxWidth: .infinity)
             Text("Sign In")
                 .foregroundColor(.white)
                 .font(.system(size: 19))

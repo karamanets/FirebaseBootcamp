@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @ObservedObject var vm: SignInEmail
+    @ObservedObject var vm: SignInEmailViewModel
     
     var body: some View {
             List {
@@ -22,7 +22,7 @@ struct ProfileView: View {
 struct SomeView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProfileView(vm: SignInEmail())
+            ProfileView(vm: SignInEmailViewModel())
         }
     }
 }

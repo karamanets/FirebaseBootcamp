@@ -20,13 +20,17 @@
 		2C76DE6D2A0FBE9700243D18 /* SignInView_Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76DE6C2A0FBE9700243D18 /* SignInView_Apple.swift */; };
 		2C76DE6F2A0FC3CD00243D18 /* SignInViewModel_Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76DE6E2A0FC3CD00243D18 /* SignInViewModel_Apple.swift */; };
 		2C76DE712A0FD66800243D18 /* Utiliti.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76DE702A0FD66800243D18 /* Utiliti.swift */; };
+		2C7C78752A13AF0800F8D11B /* SignInViewRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C78742A13AF0800F8D11B /* SignInViewRoot.swift */; };
+		2C7C78772A13AF9500F8D11B /* SignInViewModel_Anon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C78762A13AF9500F8D11B /* SignInViewModel_Anon.swift */; };
+		2C7C787B2A13B43F00F8D11B /* SignInView_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C787A2A13B43F00F8D11B /* SignInView_Profile.swift */; };
+		2C7C787D2A13B93C00F8D11B /* SignInView_Anon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C787C2A13B93C00F8D11B /* SignInView_Anon.swift */; };
 		2CE307CF2A0A88B400FB303C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2CE307CE2A0A88B400FB303C /* FirebaseAuth */; };
 		2CE307D22A0A8C1100FB303C /* TextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307D12A0A8C1100FB303C /* TextFieldStyle.swift */; };
-		2CE307D92A0A95A500FB303C /* SignInEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307D82A0A95A500FB303C /* SignInEmail.swift */; };
+		2CE307D92A0A95A500FB303C /* SignInEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307D82A0A95A500FB303C /* SignInEmailViewModel.swift */; };
 		2CE307DB2A0A99F900FB303C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307DA2A0A99F900FB303C /* ProfileView.swift */; };
 		2CE307DF2A0A9C1B00FB303C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307DE2A0A9C1B00FB303C /* AuthManager.swift */; };
 		2CE58F3D2A0A7ED1008682B4 /* FairebaseBootcampApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE58F3C2A0A7ED1008682B4 /* FairebaseBootcampApp.swift */; };
-		2CE58F3F2A0A7ED1008682B4 /* AuthenticationEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE58F3E2A0A7ED1008682B4 /* AuthenticationEmailView.swift */; };
+		2CE58F3F2A0A7ED1008682B4 /* SignInEmailRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE58F3E2A0A7ED1008682B4 /* SignInEmailRoot.swift */; };
 		2CE58F412A0A7ED1008682B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE58F402A0A7ED1008682B4 /* Assets.xcassets */; };
 		2CE58F442A0A7ED1008682B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE58F432A0A7ED1008682B4 /* Preview Assets.xcassets */; };
 		2CE58F4B2A0A8064008682B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CE58F4A2A0A8064008682B4 /* GoogleService-Info.plist */; };
@@ -46,13 +50,17 @@
 		2C76DE6C2A0FBE9700243D18 /* SignInView_Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView_Apple.swift; sourceTree = "<group>"; };
 		2C76DE6E2A0FC3CD00243D18 /* SignInViewModel_Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel_Apple.swift; sourceTree = "<group>"; };
 		2C76DE702A0FD66800243D18 /* Utiliti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utiliti.swift; sourceTree = "<group>"; };
+		2C7C78742A13AF0800F8D11B /* SignInViewRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewRoot.swift; sourceTree = "<group>"; };
+		2C7C78762A13AF9500F8D11B /* SignInViewModel_Anon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel_Anon.swift; sourceTree = "<group>"; };
+		2C7C787A2A13B43F00F8D11B /* SignInView_Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView_Profile.swift; sourceTree = "<group>"; };
+		2C7C787C2A13B93C00F8D11B /* SignInView_Anon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView_Anon.swift; sourceTree = "<group>"; };
 		2CE307D12A0A8C1100FB303C /* TextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyle.swift; sourceTree = "<group>"; };
-		2CE307D82A0A95A500FB303C /* SignInEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmail.swift; sourceTree = "<group>"; };
+		2CE307D82A0A95A500FB303C /* SignInEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailViewModel.swift; sourceTree = "<group>"; };
 		2CE307DA2A0A99F900FB303C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		2CE307DE2A0A9C1B00FB303C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		2CE58F392A0A7ED1008682B4 /* FairebaseBootcamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FairebaseBootcamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE58F3C2A0A7ED1008682B4 /* FairebaseBootcampApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FairebaseBootcampApp.swift; sourceTree = "<group>"; };
-		2CE58F3E2A0A7ED1008682B4 /* AuthenticationEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEmailView.swift; sourceTree = "<group>"; };
+		2CE58F3E2A0A7ED1008682B4 /* SignInEmailRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailRoot.swift; sourceTree = "<group>"; };
 		2CE58F402A0A7ED1008682B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CE58F432A0A7ED1008682B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2CE58F4A2A0A8064008682B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -78,8 +86,8 @@
 		2C0101412A0E65ED00A96D8A /* Authentication_Email */ = {
 			isa = PBXGroup;
 			children = (
-				2CE307D82A0A95A500FB303C /* SignInEmail.swift */,
-				2CE58F3E2A0A7ED1008682B4 /* AuthenticationEmailView.swift */,
+				2CE58F3E2A0A7ED1008682B4 /* SignInEmailRoot.swift */,
+				2CE307D82A0A95A500FB303C /* SignInEmailViewModel.swift */,
 				2C2AE1722A0BD50400D07F7F /* SignInUpView.swift */,
 				2CE307DA2A0A99F900FB303C /* ProfileView.swift */,
 			);
@@ -96,6 +104,7 @@
 				2C0101412A0E65ED00A96D8A /* Authentication_Email */,
 				2C0101432A0E668900A96D8A /* Authentication_Google */,
 				2C76DE6B2A0FBE7100243D18 /* Authentication_Apple */,
+				2C1D165B2A1272C500EBCDD5 /* Authentication_Anonymously */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -108,6 +117,17 @@
 				2C0101462A0E6A0F00A96D8A /* GoogleSignIn.swift */,
 			);
 			path = Authentication_Google;
+			sourceTree = "<group>";
+		};
+		2C1D165B2A1272C500EBCDD5 /* Authentication_Anonymously */ = {
+			isa = PBXGroup;
+			children = (
+				2C7C78742A13AF0800F8D11B /* SignInViewRoot.swift */,
+				2C7C78762A13AF9500F8D11B /* SignInViewModel_Anon.swift */,
+				2C7C787C2A13B93C00F8D11B /* SignInView_Anon.swift */,
+				2C7C787A2A13B43F00F8D11B /* SignInView_Profile.swift */,
+			);
+			path = Authentication_Anonymously;
 			sourceTree = "<group>";
 		};
 		2C76DE6B2A0FBE7100243D18 /* Authentication_Apple */ = {
@@ -266,12 +286,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C2AE1732A0BD50400D07F7F /* SignInUpView.swift in Sources */,
+				2C7C787B2A13B43F00F8D11B /* SignInView_Profile.swift in Sources */,
 				2C2AE1712A0BD32300D07F7F /* RootView.swift in Sources */,
+				2C7C787D2A13B93C00F8D11B /* SignInView_Anon.swift in Sources */,
+				2C7C78772A13AF9500F8D11B /* SignInViewModel_Anon.swift in Sources */,
 				2CE307D22A0A8C1100FB303C /* TextFieldStyle.swift in Sources */,
 				2CE307DF2A0A9C1B00FB303C /* AuthManager.swift in Sources */,
-				2CE307D92A0A95A500FB303C /* SignInEmail.swift in Sources */,
+				2CE307D92A0A95A500FB303C /* SignInEmailViewModel.swift in Sources */,
 				2C0101472A0E6A0F00A96D8A /* GoogleSignIn.swift in Sources */,
-				2CE58F3F2A0A7ED1008682B4 /* AuthenticationEmailView.swift in Sources */,
+				2CE58F3F2A0A7ED1008682B4 /* SignInEmailRoot.swift in Sources */,
+				2C7C78752A13AF0800F8D11B /* SignInViewRoot.swift in Sources */,
 				2C1D165A2A12598900EBCDD5 /* SighInAppleHelper.swift in Sources */,
 				2CE58F3D2A0A7ED1008682B4 /* FairebaseBootcampApp.swift in Sources */,
 				2C76DE6D2A0FBE9700243D18 /* SignInView_Apple.swift in Sources */,

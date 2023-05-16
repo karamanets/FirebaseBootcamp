@@ -14,6 +14,7 @@ final class AuthManager {
     
     private init() {}
     
+    //MARK: Email
     ///📌 Create user with email
     func createUser(email: String, password: String) async throws -> AuthManagerModel {
         
@@ -67,6 +68,7 @@ final class AuthManager {
     }
     
     ///📌 User can use deferent Provider to signIn
+    @discardableResult
     func getProvider() throws -> [AuthProviderOptions] {
         guard let providerData = Auth.auth().currentUser?.providerData else {
             throw URLError(.badServerResponse)
@@ -84,6 +86,7 @@ final class AuthManager {
         return providers
     }
     
+    //MARK: Google
     ///📌 For SignIn Google and Apple
     private func signIn(credential: AuthCredential) async throws -> AuthManagerModel  {
         let authDataResult = try await Auth.auth().signIn(with: credential)
@@ -97,12 +100,52 @@ final class AuthManager {
         return try await signIn(credential: credential)
     }
     
+    //MARK: Apple
     ///📌  Sign with Apple
     @discardableResult
     func signInWithApple(tokens: SignInWithResult) async throws -> AuthManagerModel {
         let credential = OAuthProvider.credential(withProviderID: AuthProviderOptions.apple.rawValue , idToken: tokens.token, accessToken: tokens.nonce)
         return try await signIn(credential: credential)
     }
+    
+    //MARK: Anonymously
+    ///📌 SignIn Anonymously
+    @discardableResult
+    func signInAnonymously() async throws -> AuthManagerModel {
+        
+        let signInResult = try await Auth.auth().signInAnonymously()
+        
+        return AuthManagerModel(user: signInResult.user)
+    }
+    
+    ///📌 Get Credential
+    private func linkCredential(credential: AuthCredential) async throws -> AuthManagerModel {
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.badURL)
+        }
+        let authDataResult = try await user.link(with: credential)
+        
+        return AuthManagerModel(user: authDataResult.user)
+    }
+    
+    ///📌 Link User from Anon Account -> to Auth Account - Email
+    func linkEmail(email: String, password: String) async throws -> AuthManagerModel {
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        return try await linkCredential(credential: credential)
+    }
+    
+    ///📌 Link User from Anon Account -> to Auth Account - Apple
+    func linkApple(tokens: SignInWithResult) async throws -> AuthManagerModel {
+        let credential = OAuthProvider.credential(withProviderID: AuthProviderOptions.apple.rawValue , idToken: tokens.token, accessToken: tokens.nonce)
+        return try await linkCredential(credential: credential)
+    }
+    
+    ///📌 Link User from Anon Account -> to Auth Account - Google
+    func linkGoogle(tokens: GoogleSignInModel) async throws -> AuthManagerModel {
+        let credential = GoogleAuthProvider.credential(withIDToken: tokens.idToken, accessToken: tokens.accessToken)
+        return try await linkCredential(credential: credential)
+    }
+    
 }
 
 //MARK: Providers
