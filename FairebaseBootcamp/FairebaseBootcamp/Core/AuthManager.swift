@@ -86,6 +86,14 @@ final class AuthManager {
         return providers
     }
     
+    ///📌 Delete User / Account -> must have opportunity to delete account etch user (First show alert and then re-signIn to be sure )
+    func deleteAccount() async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.badURL)
+        }
+        try await user.delete()
+    }
+    
     //MARK: Google
     ///📌 For SignIn Google and Apple
     private func signIn(credential: AuthCredential) async throws -> AuthManagerModel  {

@@ -26,7 +26,25 @@ struct SignInView_Profile: View {
                 } label: {
                     Text("Sign Out")
                 }
+                
+                Button(role: .destructive) {
+                    Task {
+                        do {
+                            try await vm.deleteAccount()
+                            withAnimation(.spring()) {
+                                vm.isSignIn = false
+                            }
+                        } catch let error {
+                            print("[⚠️] Error: \(error.localizedDescription)")
+                        }
+                    }
+                } label: {
+                    Text("Delete Account")
+                }
+            } header: {
+                Text("SignOut or delete")
             }
+            
             if vm.user?.isAnon == true {
                 Section {
                     Button {

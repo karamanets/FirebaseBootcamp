@@ -37,4 +37,8 @@ final class SignInViewModel_Anon: ObservableObject {
         self.user = try await AuthManager.shared.linkEmail(email: email, password: password)
     }
     
+    func deleteAccount() async throws {
+        try await AuthManager.shared.deleteAccount()
+    }
+    
 }
