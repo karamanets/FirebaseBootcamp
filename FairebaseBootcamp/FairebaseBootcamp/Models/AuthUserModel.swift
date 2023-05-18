@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 
 //MARK: - 🔥 Model
-struct AuthManagerModel {
+struct AuthUserModel {
     
     let uid: String
     let email: String?

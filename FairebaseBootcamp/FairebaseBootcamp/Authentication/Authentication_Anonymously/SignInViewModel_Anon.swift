@@ -12,7 +12,7 @@ final class SignInViewModel_Anon: ObservableObject {
     
     @Published var isSignIn: Bool = false
     @Published var email: String = ""
-    @Published var user: AuthManagerModel? = nil
+    @Published var user: AuthUserModel? = nil
     
     func signInAnonymously() async throws {
         try await AuthManager.shared.signInAnonymously()

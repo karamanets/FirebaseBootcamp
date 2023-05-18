@@ -14,7 +14,7 @@ struct SignInEmailRoot: View {
     var body: some View {
         ZStack {
             if vm.isSignIn {
-                ProfileView(vm: vm)
+                StartCoreAppView(vm: vm)
                     .transition(.move(edge: .leading))
             } else {
                 SignInUpView(vm: vm)

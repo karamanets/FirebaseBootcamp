@@ -16,7 +16,7 @@ final class SignInEmailViewModel: ObservableObject {
     @Published var alert = false
     @Published var alertMessage = ""
     @Published var isSignIn = false
-    @Published var user: AuthManagerModel? = nil
+    @Published var user: AuthUserModel? = nil
     
     func signUp() async throws {
         /// Validation
@@ -26,6 +26,8 @@ final class SignInEmailViewModel: ObservableObject {
         user = returnResult
         alert.toggle()
         alertMessage = "[🔥] Success user email is: \(returnResult.email ?? "")"
+        /// Create profile for user at the same time when create auth
+        try await UserManager.shared.createUser(auth: returnResult)
     }
     
     func signIn() async throws {
@@ -40,7 +42,7 @@ final class SignInEmailViewModel: ObservableObject {
         try AuthManager.shared.signOut()
     }
 
-    func isUserExist() throws -> AuthManagerModel {
+    func isUserExist() throws -> AuthUserModel {
         let user = try AuthManager.shared.getAuthenticatedUser()
         return user
     }
