@@ -12,14 +12,12 @@ struct ProfileView: View {
     @StateObject private var vm = ProfileViewMode()
     @Binding var showCoreApp: Bool
     
-    
-    
     var body: some View {
         NavigationStack {
             List {
                 
                 if let user = vm.user {
-                    Text("User ID is: \(user.userID)")
+                    Text("User ID is: \(user.userId)")
                 }
                 
                 if let email = vm.user?.email {
@@ -32,6 +30,22 @@ struct ProfileView: View {
                 
                 if let date = vm.user?.dateCreated {
                     Text(vm.getDate(date: date))
+                }
+                
+                if let isPremium = vm.user?.isPremium {
+                    Text(String(describing: isPremium))
+                }
+                
+                Button {
+                    vm.toggleIsPremium()
+                } label: {
+                    Text("Toggle isPremium Merge")
+                }
+                
+                Button {
+                    vm.toggleIsPremium2()
+                } label: {
+                    Text("Toggle isPremium Single")
                 }
             }
             .font(.headline)

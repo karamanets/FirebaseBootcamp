@@ -26,8 +26,11 @@ final class SignInEmailViewModel: ObservableObject {
         user = returnResult
         alert.toggle()
         alertMessage = "[🔥] Success user email is: \(returnResult.email ?? "")"
-        /// Create profile for user at the same time when create auth
-        try await UserManager.shared.createUser(auth: returnResult)
+        
+        /// Create profile for user at the same time when create auth - with codable protocol
+        let user = DBUserModel(auth: returnResult)
+        
+        try await UserManager.shared.createUser(user: user)
     }
     
     func signIn() async throws {

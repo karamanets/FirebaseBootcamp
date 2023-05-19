@@ -16,41 +16,56 @@ final class UserManager {
     static let shared = UserManager()
     private init() {}
     
-    ///📌 Create new collection - users and document inside with current user profile in Firestore with id from auth
-    func createUser(auth: AuthUserModel) async throws {
-        
-        var userData: [String: Any] = [
-            "user_id"    : auth.uid,
-            "is_anon"    : auth.isAnon,
-            "date_create": Timestamp()
-        ]
-        ///🔥 email and photoUrl is optional
-        if let email = auth.email {
-            userData["email"] = email
-        }
-        if let photoUrl = auth.photoUrl {
-            userData["photo_url"] = photoUrl
-        }
-        ///🔥 if collection and user exist -> add if not -> create
-        try await Firestore.firestore().collection("users").document(auth.uid).setData(userData, merge: false)
+    ///📌 Path to users collection
+    private let userCollection = Firestore.firestore().collection("users")
+    
+    ///📌 Path user document with userID
+    private func userDocument(userId: String) -> DocumentReference {
+        userCollection.document(userId)
     }
     
-    ///📌 Get user portfolio from collection users in firestore use snapshot
-    func getUser(userID: String) async throws -> DBUserModel {
+    ///📌 Make key style SnakeCase : user_id  (from 10.0.0 ver. Firebase)
+    private let encoder: Firestore.Encoder = {
+        let encoder = Firestore.Encoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        return encoder
+    }()
+    
+    ///📌 Make key style SnakeCase : user_id  (from 10.0.0 ver. Firebase)
+    private let decoder: Firestore.Decoder = {
+        let decoder = Firestore.Decoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
         
-        let snapshot = try await Firestore.firestore().collection("users").document(userID).getDocument()
+    ///📌 Create new collection - users and document inside with current user profile in Firestore with id from auth  (codable protocol)
+    func createUser(user: DBUserModel) async throws {
+        ///Example with Snake style : user_id
+        //try userDocument(userId: user.userId).setData(from: user, merge: false, encoder: encoder)
         
-        guard
-            let data = snapshot.data(),
-            let userID = data["user_id"] as? String else {
-            throw URLError(.badServerResponse)
-        }
-        
-        let isAnon   = data["is_anon"] as? Bool
-        let email    = data["email"] as? String
-        let photoUrl = data["photo_url"] as? String
-        let date     = data["date_create"] as? Date
-        
-        return DBUserModel(userID: userID, isAnon: isAnon, email: email, photoUrl: photoUrl, dateCreated: date)
+        /// Example with CodingKeys
+        try userDocument(userId: user.userId).setData(from: user, merge: false)
     }
+        
+    ///📌 Get user document from users collection (codable protocol)
+    func getUser(user: String) async throws -> DBUserModel {
+        try await userDocument(userId: user).getDocument(as: DBUserModel.self)
+    }
+    
+    ///📌  Update data with merge -> set all user data
+    func updateUserIsPremiumStatus(user: DBUserModel) async throws {
+        try userDocument(userId: user.userId).setData(from: user, merge: true)
+    }
+    
+    ///📌  Update data with single value - is more safe
+    func updateUserIsPremiumStatusSingle(userId: String, isPremium: Bool) async throws {
+        
+        ///Key must be the same lake encoder
+        let data: [String: Any] = [
+            DBUserModel.CodingKeys.isPremium.rawValue : isPremium
+        ]
+        
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
 }
