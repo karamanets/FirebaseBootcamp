@@ -12,41 +12,100 @@ struct ProfileView: View {
     @StateObject private var vm = ProfileViewMode()
     @Binding var showCoreApp: Bool
     
+    /// Same Value -> Just a bit hard code )
+    let preference = ["Sport", "Films", "Coding"]
+    
+    /// Some data
+    let game = Games(id: "12", name: "Lineage 2", top: true)
+    
+    private func preferenceSelected(text: String) -> Bool {
+        vm.user?.preference?.contains(text) == true
+    }
+    
     var body: some View {
         NavigationStack {
             List {
                 
-                if let user = vm.user {
-                    Text("User ID is: \(user.userId)")
+                VStack (alignment: .leading){
+                    if let user = vm.user {
+                        Text("User ID is: \(user.userId)")
+                    }
+                    
+                    if let email = vm.user?.email {
+                        Text("Email is: \(email)")
+                    }
+                    
+                    if let isAnon = vm.user?.isAnon {
+                        Text("is Anon? \(isAnon.description.capitalized)")
+                    }
+                    
+                    if let date = vm.user?.dateCreated {
+                        Text(vm.getDate(date: date))
+                    }
+                    
+                    if let isPremium = vm.user?.isPremium {
+                        Text("isPremium: \(String(describing: isPremium))")
+                    }
                 }
                 
-                if let email = vm.user?.email {
-                    Text("Email is: \(email)")
+                HStack {
+                    Button {
+                        vm.toggleIsPremium()
+                    } label: {
+                        Text("Toggle isPremium Merge")
+                            .font(.system(size: 15))
+                    }.buttonStyle(.borderedProminent)
+                    
+                    Button {
+                        vm.toggleIsPremium2()
+                    } label: {
+                        Text("Toggle isPremium Single")
+                            .font(.system(size: 15))
+                    }.buttonStyle(.borderedProminent)
                 }
                 
-                if let isAnon = vm.user?.isAnon {
-                    Text("is Anon? \(isAnon.description.capitalized)")
+                HStack {
+                    ForEach(preference, id: \.self) { string in
+                        Button {
+                            if preferenceSelected(text: string) {
+                                vm.removePreference(value: string)
+                            } else {
+                                vm.updatePreference(value: string)
+                            }
+                        } label: {
+                            Text(string)
+                                .font(.system(size: 15))
+                        }.buttonStyle(.borderedProminent)
+                            .tint(preferenceSelected(text: string) ? .green : .red)
+                    }
+                    
                 }
                 
-                if let date = vm.user?.dateCreated {
-                    Text(vm.getDate(date: date))
+                VStack {
+                    if let preference = vm.user?.preference {
+                        Text(String(describing: preference))
+                    }
                 }
                 
-                if let isPremium = vm.user?.isPremium {
-                    Text(String(describing: isPremium))
+                VStack {
+                    Button {
+                        if vm.user?.game == nil {
+                            vm.updateGame(game: game)
+                        } else {
+                            vm.removeGame()
+                        }
+                    } label: {
+                        Text("Add/Remove Game")
+                            .font(.system(size: 15))
+                    }.buttonStyle(.borderedProminent)
                 }
                 
-                Button {
-                    vm.toggleIsPremium()
-                } label: {
-                    Text("Toggle isPremium Merge")
+                HStack {
+                    if vm.user?.game != nil {
+                        Text(String(describing: vm.user?.game?.name))
+                    }
                 }
                 
-                Button {
-                    vm.toggleIsPremium2()
-                } label: {
-                    Text("Toggle isPremium Single")
-                }
             }
             .font(.headline)
             .navigationTitle("Profile")

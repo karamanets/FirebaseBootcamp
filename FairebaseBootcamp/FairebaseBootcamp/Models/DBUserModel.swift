@@ -7,6 +7,13 @@
 
 import Foundation
 
+///🔥  Inside collection users, inside user document add custom type (map) with some data
+struct Games: Codable {
+    let id: String
+    let name: String
+    let top: Bool
+}
+
 ///🔥 userID must be not optional all else data make optional
 struct DBUserModel: Codable {
     let userId: String
@@ -15,8 +22,10 @@ struct DBUserModel: Codable {
     let photoUrl: String?
     let dateCreated: Date?
     var isPremium: Bool?
+    let preference: [String]?
+    let game: Games? /// Add custom type
     
-    ///📌 inject auth
+    ///📌 inject with Auth
     init(auth: AuthUserModel) {
         self.userId = auth.uid
         self.isAnon = auth.isAnon
@@ -24,16 +33,20 @@ struct DBUserModel: Codable {
         self.photoUrl = auth.photoUrl
         self.dateCreated = Date()
         self.isPremium = false
+        self.preference = nil
+        self.game = nil
     }
     
-    ///📌 init for marge data with userId
+    ///📌 init with user ID
     init(
     userId: String,
     isAnon: Bool? = nil,
     email: String? = nil,
     photoUrl: String? = nil,
     dateCreated: Date? = nil,
-    isPremium: Bool? = nil
+    isPremium: Bool? = nil,
+    preference: [String]? = nil,
+    game: Games? = nil
     ) {
         self.userId = userId
         self.isAnon = isAnon
@@ -41,10 +54,11 @@ struct DBUserModel: Codable {
         self.photoUrl = photoUrl
         self.dateCreated = dateCreated
         self.isPremium = isPremium
+        self.preference = preference
+        self.game = game
     }
     
     //MARK: Methods
-    
     ///📌 Toggle isPremium value use mutating in model
     mutating func toggleIsPremium() {
         let currentValue = isPremium ?? false
@@ -59,16 +73,8 @@ struct DBUserModel: Codable {
         case photoUrl = "photo_url"
         case dateCreated = "date_created"
         case isPremium = "is_premium"
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.userId, forKey: .userId)
-        try container.encodeIfPresent(self.isAnon, forKey: .isAnon)
-        try container.encodeIfPresent(self.email, forKey: .email)
-        try container.encodeIfPresent(self.photoUrl, forKey: .photoUrl)
-        try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
-        try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
+        case preference = "preference"
+        case game = "game"
     }
     
     init(from decoder: Decoder) throws {
@@ -79,5 +85,19 @@ struct DBUserModel: Codable {
         self.photoUrl = try container.decodeIfPresent(String.self, forKey: .photoUrl)
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
+        self.preference = try container.decodeIfPresent([String].self, forKey: .preference)
+        self.game = try container.decodeIfPresent(Games.self, forKey: .game)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.userId, forKey: .userId)
+        try container.encodeIfPresent(self.isAnon, forKey: .isAnon)
+        try container.encodeIfPresent(self.email, forKey: .email)
+        try container.encodeIfPresent(self.photoUrl, forKey: .photoUrl)
+        try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
+        try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
+        try container.encodeIfPresent(self.preference, forKey: .preference)
+        try container.encodeIfPresent(self.game, forKey: .game)
     }
 }

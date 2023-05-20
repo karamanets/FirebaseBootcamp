@@ -64,8 +64,50 @@ final class UserManager {
         let data: [String: Any] = [
             DBUserModel.CodingKeys.isPremium.rawValue : isPremium
         ]
-        
         try await userDocument(userId: userId).updateData(data)
+    }
+    
+    ///📌 Update data Array (append) new Element
+    func updatePreferenceArray(userId: String, preference: String) async throws {
+        
+        /// Instead set all array -> just add new value use -> FieldValue.arrayUnion
+        let data: [String: Any] = [
+            DBUserModel.CodingKeys.preference.rawValue : FieldValue.arrayUnion([preference])
+        ]
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
+    ///📌 Remove data Array (remove)  Element
+    func removePreferenceArray(userId: String, preference: String) async throws {
+        
+        /// Instead set all array -> just add new value use -> FieldValue.arrayUnion
+        let data: [String: Any] = [
+            DBUserModel.CodingKeys.preference.rawValue : FieldValue.arrayRemove([preference])
+        ]
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
+    ///📌 Update user Document with  -> Custom mapData
+    func updateGame(userId: String, game: Games) async throws {
+        
+        guard let data = try? encoder.encode(game) else {
+            throw URLError(.badURL)
+        }
+        /// Add custom struct
+        let dict: [String: Any] = [
+            DBUserModel.CodingKeys.game.rawValue : data
+        ]
+        try await userDocument(userId: userId).updateData(dict)
+    }
+    
+    ///📌 Remove in user document -> Document with  Custom mapData
+    func removeGame(userId: String) async throws {
+        
+        /// Remove custom struct
+        let dict: [String: Any?] = [
+            DBUserModel.CodingKeys.game.rawValue : nil
+        ]
+        try await userDocument(userId: userId).updateData(dict as [AnyHashable: Any])
     }
     
 }

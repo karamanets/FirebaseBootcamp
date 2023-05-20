@@ -52,4 +52,48 @@ final class ProfileViewMode: ObservableObject {
         }
     }
     
+    ///📌 Update data preference
+    func updatePreference(value: String) {
+        
+        guard let user = self.user else { return }
+        
+        Task {
+            try await UserManager.shared.updatePreferenceArray(userId: user.userId, preference: value)
+            self.user = try await UserManager.shared.getUser(user: user.userId)
+        }
+    }
+    
+    ///📌 Remove data preference
+    func removePreference(value: String) {
+        
+        guard let user = self.user else { return }
+        
+        Task {
+            try await UserManager.shared.removePreferenceArray(userId: user.userId, preference: value)
+            self.user = try await UserManager.shared.getUser(user: user.userId)
+        }
+    }
+    
+    ///📌 Update custom type Game
+    func updateGame(game: Games) {
+        
+        guard let user = self.user else { return }
+
+        Task {
+            try await UserManager.shared.updateGame(userId: user.userId, game: game)
+            self.user = try await UserManager.shared.getUser(user: user.userId)
+        }
+    }
+    
+    ///📌 Remove custom type Game
+    func removeGame() {
+        
+        guard let user = self.user else { return }
+        
+        Task {
+            try await UserManager.shared.removeGame(userId: user.userId)
+            self.user = try await UserManager.shared.getUser(user: user.userId)
+        }
+    }
+    
 }
