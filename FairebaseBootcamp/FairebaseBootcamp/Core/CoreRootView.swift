@@ -15,9 +15,9 @@ struct CoreRootView: View {
     var body: some View {
             TabView(selection: $selection) {
                 
-                Text("Some")
+                ProductsView()
                     .tabItem {
-                        Label("Some View", systemImage: "plus")
+                        Label("Products", systemImage: "star.square.on.square.fill")
                     }.tag(1)
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.blue.opacity(0.2), for: .tabBar)

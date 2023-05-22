@@ -31,6 +31,11 @@
 		2C7C78772A13AF9500F8D11B /* SignInViewModel_Anon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C78762A13AF9500F8D11B /* SignInViewModel_Anon.swift */; };
 		2C7C787B2A13B43F00F8D11B /* SignInView_Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C787A2A13B43F00F8D11B /* SignInView_Profile.swift */; };
 		2C7C787D2A13B93C00F8D11B /* SignInView_Anon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7C787C2A13B93C00F8D11B /* SignInView_Anon.swift */; };
+		2CD9B37D2A1B8E8B00B1394A /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B37C2A1B8E8A00B1394A /* ProductModel.swift */; };
+		2CD9B3802A1B8F1400B1394A /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B37F2A1B8F1400B1394A /* ProductsView.swift */; };
+		2CD9B3822A1B962D00B1394A /* ProductsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B3812A1B962D00B1394A /* ProductsManager.swift */; };
+		2CD9B3842A1BA9EA00B1394A /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B3832A1BA9EA00B1394A /* ProductsViewModel.swift */; };
+		2CD9B3862A1BAAD000B1394A /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B3852A1BAAD000B1394A /* ProductCell.swift */; };
 		2CE307CF2A0A88B400FB303C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2CE307CE2A0A88B400FB303C /* FirebaseAuth */; };
 		2CE307D22A0A8C1100FB303C /* TextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307D12A0A8C1100FB303C /* TextFieldStyle.swift */; };
 		2CE307D92A0A95A500FB303C /* SignInEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE307D82A0A95A500FB303C /* SignInEmailViewModel.swift */; };
@@ -66,6 +71,11 @@
 		2C7C78762A13AF9500F8D11B /* SignInViewModel_Anon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel_Anon.swift; sourceTree = "<group>"; };
 		2C7C787A2A13B43F00F8D11B /* SignInView_Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView_Profile.swift; sourceTree = "<group>"; };
 		2C7C787C2A13B93C00F8D11B /* SignInView_Anon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView_Anon.swift; sourceTree = "<group>"; };
+		2CD9B37C2A1B8E8A00B1394A /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		2CD9B37F2A1B8F1400B1394A /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
+		2CD9B3812A1B962D00B1394A /* ProductsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsManager.swift; sourceTree = "<group>"; };
+		2CD9B3832A1BA9EA00B1394A /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
+		2CD9B3852A1BAAD000B1394A /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		2CE307D12A0A8C1100FB303C /* TextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyle.swift; sourceTree = "<group>"; };
 		2CE307D82A0A95A500FB303C /* SignInEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailViewModel.swift; sourceTree = "<group>"; };
 		2CE307DA2A0A99F900FB303C /* StartCoreAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartCoreAppView.swift; sourceTree = "<group>"; };
@@ -146,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				2C6091F02A16611700EEF6F8 /* CoreRootView.swift */,
+				2CD9B37B2A1B8E6400B1394A /* Product */,
 				2C6091F22A1668A400EEF6F8 /* Profile */,
 			);
 			path = Core;
@@ -165,6 +176,7 @@
 			children = (
 				2CE307DE2A0A9C1B00FB303C /* AuthManager.swift */,
 				2C6091F92A168C4F00EEF6F8 /* UserManager.swift */,
+				2CD9B3812A1B962D00B1394A /* ProductsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -174,6 +186,7 @@
 			children = (
 				2C0101532A0E780700A96D8A /* AuthUserModel.swift */,
 				2C6091FC2A1696D400EEF6F8 /* DBUserModel.swift */,
+				2CD9B37C2A1B8E8A00B1394A /* ProductModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,6 +199,16 @@
 				2C1D16592A12598900EBCDD5 /* SighInAppleHelper.swift */,
 			);
 			path = Authentication_Apple;
+			sourceTree = "<group>";
+		};
+		2CD9B37B2A1B8E6400B1394A /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				2CD9B37F2A1B8F1400B1394A /* ProductsView.swift */,
+				2CD9B3832A1BA9EA00B1394A /* ProductsViewModel.swift */,
+				2CD9B3852A1BAAD000B1394A /* ProductCell.swift */,
+			);
+			path = Product;
 			sourceTree = "<group>";
 		};
 		2CE307CD2A0A88B400FB303C /* Frameworks */ = {
@@ -338,13 +361,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CD9B3802A1B8F1400B1394A /* ProductsView.swift in Sources */,
 				2C2AE1732A0BD50400D07F7F /* SignInUpView.swift in Sources */,
 				2C6091F62A16748900EEF6F8 /* ProfileViewMode.swift in Sources */,
+				2CD9B3822A1B962D00B1394A /* ProductsManager.swift in Sources */,
 				2C7C787B2A13B43F00F8D11B /* SignInView_Profile.swift in Sources */,
 				2C2AE1712A0BD32300D07F7F /* RootView.swift in Sources */,
+				2CD9B37D2A1B8E8B00B1394A /* ProductModel.swift in Sources */,
 				2C7C787D2A13B93C00F8D11B /* SignInView_Anon.swift in Sources */,
 				2C7C78772A13AF9500F8D11B /* SignInViewModel_Anon.swift in Sources */,
 				2CE307D22A0A8C1100FB303C /* TextFieldStyle.swift in Sources */,
+				2CD9B3862A1BAAD000B1394A /* ProductCell.swift in Sources */,
 				2CE307DF2A0A9C1B00FB303C /* AuthManager.swift in Sources */,
 				2CE307D92A0A95A500FB303C /* SignInEmailViewModel.swift in Sources */,
 				2C0101472A0E6A0F00A96D8A /* GoogleSignIn.swift in Sources */,
@@ -353,6 +380,7 @@
 				2C6091F12A16611700EEF6F8 /* CoreRootView.swift in Sources */,
 				2C1D165A2A12598900EBCDD5 /* SighInAppleHelper.swift in Sources */,
 				2CE58F3D2A0A7ED1008682B4 /* FairebaseBootcampApp.swift in Sources */,
+				2CD9B3842A1BA9EA00B1394A /* ProductsViewModel.swift in Sources */,
 				2C76DE6D2A0FBE9700243D18 /* SignInView_Apple.swift in Sources */,
 				2C2AE16D2A0BCB9300D07F7F /* CustomButtonStyle.swift in Sources */,
 				2C76DE6F2A0FC3CD00243D18 /* SignInViewModel_Apple.swift in Sources */,

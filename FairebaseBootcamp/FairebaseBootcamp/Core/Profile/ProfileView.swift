@@ -48,6 +48,7 @@ struct ProfileView: View {
                     }
                 }
                 
+                
                 HStack {
                     Button {
                         vm.toggleIsPremium()
@@ -122,12 +123,13 @@ struct ProfileView: View {
         .task {
             try? await vm.loadCurrentUser()
         }
+        
     }
 }
 
 //                 🔱
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(showCoreApp: .constant(true))
+            ProfileView(showCoreApp: .constant(true))
     }
 }
