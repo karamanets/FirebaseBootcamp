@@ -11,6 +11,8 @@ import Foundation
 final class ProductsViewModel: ObservableObject {
     
     @Published var products: [Product] = []
+    @Published var filterPrice: FiltersPrice? = nil
+    @Published var filterCategory: FilterCategory? = nil
     
     ///📌 Download same random data from (dummyjson) and then upload this data to firestore
     func downloadProductsAndUploadFirebase() {
@@ -40,9 +42,63 @@ final class ProductsViewModel: ObservableObject {
         
     }
     
-    ///📌 Download data (all products) back from Firestore collection products
-    func getAllProducts() async throws {
-        self.products = try await ProductsManager.shared.getAllProducts()
+    //MARK: Filters
+    ///📌 Type of filters price
+    enum FiltersPrice: String, CaseIterable {
+        case noFilter
+        case priceHeight
+        case priceLow
+        
+        var priceDescending: Bool? {
+            switch self {
+                
+            case .noFilter:
+                return nil
+            case .priceHeight:
+                return true
+            case .priceLow:
+                return false
+            }
+        }
+    }
+    
+    ///📌 Filter Product Price
+    func selectedFilterPrice(option: FiltersPrice) async throws {
+        self.filterPrice = option
+        self.getProducts()
+    }
+    
+    ///📌 Type of filters category
+    enum FilterCategory: String, CaseIterable {
+        /// The name of case must be the same as firestore
+        case noCategory
+        case smartphones
+        case laptops
+        case fragrances
+        
+        ///SetUp for noCategory
+        var categoryKey: String? {
+            if self == .noCategory {
+                return nil
+            }
+            return self.rawValue
+        }
+    }
+    
+    ///📌 Filter Product Price
+    func selectedFilterCategories(category: FilterCategory) async throws {
+        self.filterCategory = category
+        self.getProducts()
+    }
+    
+    func getProducts() {
+        Task {
+            do {
+                self.products = try await ProductsManager.shared.getFilteredProducts(forCategory: filterCategory?.categoryKey, forPrice: filterPrice?.priceDescending)
+            } catch let error {
+                print("[⚠️] Error: \(error.localizedDescription)")
+            }
+        }
     }
     
 }

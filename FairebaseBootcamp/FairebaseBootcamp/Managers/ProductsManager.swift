@@ -34,11 +34,47 @@ final class ProductsManager {
     }
     
     ///📌 Get all documents (product) from products collection (use codable protocol)
-    func getAllProducts() async throws -> [Product] {
-        
+    private func getAllProducts() async throws -> [Product] {
         try await productsCollection.getAllDocumentsGeneric(as: Product.self)
     }
     
+    ///📌 Filter by price
+    private func getAllProductsFilterByPrice(descending: Bool) async throws -> [Product] {
+        /// Filter by price descending down or up. (field in firestore)
+        try await productsCollection
+            .order(by: Product.CodingKeys.price.rawValue, descending: descending)
+            .getAllDocumentsGeneric(as: Product.self)
+    }
+    
+    ///📌 Filter by Category
+    private func getAllProductsFilterByCategory(category: String) async throws -> [Product] {
+        /// Filter by category, there is lat's of options  whereField. isEqualTo or e.s (field in firestore)
+        try await productsCollection
+            .whereField(Product.CodingKeys.category.rawValue, isEqualTo: category)
+            .getAllDocumentsGeneric(as: Product.self)
+    }
+    
+    ///📌 Filter by Category and Price at the same time
+    private func getAllProductsFilterByPriceAndCategory(category: String, descending: Bool) async throws -> [Product] {
+        try await productsCollection
+            .whereField(Product.CodingKeys.category.rawValue, isEqualTo: category)
+            .order(by: Product.CodingKeys.price.rawValue, descending: descending)
+            .getAllDocumentsGeneric(as: Product.self)
+    }
+    
+    ///📌 Filter by Category or Price or both at the same time
+    func getFilteredProducts(forCategory category: String?,forPrice descending: Bool?) async throws -> [Product] {
+        ///🔥 if let descending = descending and category = category (long form)
+        ///🔥 For combine filters need add  -> query index  (composite) (in cancel get address where add in firestore )
+        if let descending, let category {
+            return try await getAllProductsFilterByPriceAndCategory(category: category, descending: descending)
+        } else if let descending {
+            return try await getAllProductsFilterByPrice(descending: descending)
+        } else if let category {
+            return try await getAllProductsFilterByCategory(category: category)
+        }
+        return try await getAllProducts()
+    }
 }
 
 extension Query {

@@ -27,12 +27,52 @@ struct ProductsView: View {
                         vm.downloadProductsAndUploadFirebase()
                     } label: {
                         Image(systemName: "tray.and.arrow.down.fill")
-                        Text("Download")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Menu("Price: \(vm.filterPrice?.rawValue ?? "non")") {
+                        ForEach(ProductsViewModel.FiltersPrice.allCases, id: \.self) { filter in
+                            Button {
+                                Task {
+                                    do {
+                                        try await vm.selectedFilterPrice(option: filter)
+                                    } catch let error {
+                                        print("[⚠️] Error: \(error.localizedDescription)")
+                                    }
+                                }
+                            } label: {
+                                HStack {
+                                    Image(systemName: "camera.filters")
+                                    Text(filter.rawValue)
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu("Category: \(vm.filterCategory?.rawValue ?? "non")") {
+                        ForEach(ProductsViewModel.FilterCategory.allCases, id: \.self) { category in
+                            Button {
+                                Task {
+                                    do {
+                                        try await vm.selectedFilterCategories(category: category)
+                                    } catch let error {
+                                        print("[⚠️] Error: \(error.localizedDescription)")
+                                    }
+                                }
+                            } label: {
+                                HStack {
+                                    Image(systemName: "camera.filters")
+                                    Text(category.rawValue)
+                                }
+                            }
+                        }
                     }
                 }
             }
-            .task {
-                try? await vm.getAllProducts()
+            .onAppear {
+                vm.getProducts()
             }
         }
     }
