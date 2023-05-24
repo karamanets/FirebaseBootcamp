@@ -17,15 +17,22 @@ struct CoreRootView: View {
                 
                 ProductsView()
                     .tabItem {
-                        Label("Products", systemImage: "star.square.on.square.fill")
+                        Label("Products 1", systemImage: "star.square.on.square.fill")
                     }.tag(1)
+                    .toolbarBackground(.visible, for: .tabBar)
+                    .toolbarBackground(Color.blue.opacity(0.2), for: .tabBar)
+                
+                ProductsView_2()
+                    .tabItem {
+                        Label("Products 2", systemImage: "star.square.on.square.fill")
+                    }.tag(2)
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.blue.opacity(0.2), for: .tabBar)
                 
                 ProfileView(showCoreApp: $showCoreApp)
                     .tabItem {
                         Label("Profile", systemImage: "person.fill.viewfinder")
-                    }.tag(2)
+                    }.tag(3)
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.blue.opacity(0.2), for: .tabBar)
         }

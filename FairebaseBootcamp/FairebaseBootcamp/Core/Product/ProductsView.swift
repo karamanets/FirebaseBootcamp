@@ -17,9 +17,19 @@ struct ProductsView: View {
                 ForEach(vm.products) { product in
                     
                     ProductCell(product: product)
-
+                    
+                    if product == vm.products.last {
+                        ProgressView()
+                        ///onApear last
+                            .onAppear {
+                              // vm.getProducts()
+                                //print("[🔥] Get Next 7 document")
+                            }
+                    }
                 }
             }
+            .listStyle(.grouped)
+            .scrollIndicators(.hidden)
             .navigationTitle("Products")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

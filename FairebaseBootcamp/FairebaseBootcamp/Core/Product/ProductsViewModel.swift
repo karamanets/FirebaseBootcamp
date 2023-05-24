@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 @MainActor
 final class ProductsViewModel: ObservableObject {
@@ -13,6 +14,9 @@ final class ProductsViewModel: ObservableObject {
     @Published var products: [Product] = []
     @Published var filterPrice: FiltersPrice? = nil
     @Published var filterCategory: FilterCategory? = nil
+    //@Published var filterRatingAndAmount: [Product] = []
+    
+    var last: DocumentSnapshot? = nil
     
     ///📌 Download same random data from (dummyjson) and then upload this data to firestore
     func downloadProductsAndUploadFirebase() {
@@ -85,20 +89,44 @@ final class ProductsViewModel: ObservableObject {
         }
     }
     
-    ///📌 Filter Product Price
+    ///📌 Filter Product  Category
     func selectedFilterCategories(category: FilterCategory) async throws {
         self.filterCategory = category
         self.getProducts()
     }
     
+    ///📌 Filter Product Price and Category
     func getProducts() {
         Task {
             do {
-                self.products = try await ProductsManager.shared.getFilteredProducts(forCategory: filterCategory?.categoryKey, forPrice: filterPrice?.priceDescending)
+                self.products = try await ProductsManager.shared.getAllProducts(forCategory: filterCategory?.categoryKey,
+                                                                                forPrice: filterPrice?.priceDescending)
+                
+                
             } catch let error {
                 print("[⚠️] Error: \(error.localizedDescription)")
             }
         }
     }
     
+    //MARK: Product view 2
+    ///📌 Filter Rating and get som amount of downloaded documents with add more (lastRating)
+    func getProductsByRatingAndAmount() {
+        Task {
+            do {
+            
+                let (newProducts, lastDocument) = try await ProductsManager.shared.getProductsByRatingWithLastSnapshot(count: 10,
+                                                                                                                       lastDocument: last)
+                
+                self.products.append(contentsOf: newProducts)
+                self.last = lastDocument
+                
+                print("[⚠️] lastDocument \(String(describing: lastDocument))")
+                
+            } catch let error {
+                print("[⚠️] Error: \(error.localizedDescription)")
+            }
+        }
+    }
 }
+
