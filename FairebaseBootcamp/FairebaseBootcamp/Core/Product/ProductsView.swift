@@ -20,9 +20,8 @@ struct ProductsView: View {
                     
                     if product == vm.products.last {
                         ProgressView()
-                        ///onApear last
                             .onAppear {
-                              // vm.getProducts()
+                               vm.getProducts()
                                 //print("[🔥] Get Next 7 document")
                             }
                     }

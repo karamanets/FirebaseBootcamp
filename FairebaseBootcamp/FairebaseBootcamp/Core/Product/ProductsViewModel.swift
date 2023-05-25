@@ -11,12 +11,11 @@ import FirebaseFirestore
 @MainActor
 final class ProductsViewModel: ObservableObject {
     
-    @Published var products: [Product] = []
+    @Published private(set) var products: [Product] = []
     @Published var filterPrice: FiltersPrice? = nil
     @Published var filterCategory: FilterCategory? = nil
-    //@Published var filterRatingAndAmount: [Product] = []
     
-    var last: DocumentSnapshot? = nil
+    var lastDocument: DocumentSnapshot? = nil
     
     ///📌 Download same random data from (dummyjson) and then upload this data to firestore
     func downloadProductsAndUploadFirebase() {
@@ -69,6 +68,8 @@ final class ProductsViewModel: ObservableObject {
     ///📌 Filter Product Price
     func selectedFilterPrice(option: FiltersPrice) async throws {
         self.filterPrice = option
+        self.products = []       /// Reset when setUp new filter
+        self.lastDocument = nil  /// Reset when setUp new filter
         self.getProducts()
     }
     
@@ -92,16 +93,24 @@ final class ProductsViewModel: ObservableObject {
     ///📌 Filter Product  Category
     func selectedFilterCategories(category: FilterCategory) async throws {
         self.filterCategory = category
+        self.products = []       /// Reset when setUp new filter
+        self.lastDocument = nil  /// Reset when setUp new filter
         self.getProducts()
     }
     
-    ///📌 Filter Product Price and Category
+    ///📌 Filter Product Price and Category with last Snapshots
     func getProducts() {
         Task {
             do {
-                self.products = try await ProductsManager.shared.getAllProducts(forCategory: filterCategory?.categoryKey,
-                                                                                forPrice: filterPrice?.priceDescending)
+                let (newProduct, lastDocument) = try await ProductsManager.shared.getAllProducts(forCategory: filterCategory?.categoryKey,
+                                                                                                 forPrice: filterPrice?.priceDescending,
+                                                                                                 lastDocument: lastDocument)
+                self.products.append(contentsOf: newProduct)
                 
+                /// if there is last snapshot -> setUp new if not keep last
+                if let lastDocument = lastDocument {
+                    self.lastDocument = lastDocument
+                }
                 
             } catch let error {
                 print("[⚠️] Error: \(error.localizedDescription)")
@@ -116,13 +125,11 @@ final class ProductsViewModel: ObservableObject {
             do {
             
                 let (newProducts, lastDocument) = try await ProductsManager.shared.getProductsByRatingWithLastSnapshot(count: 10,
-                                                                                                                       lastDocument: last)
-                
+                                                                                                                       lastDocument: lastDocument)
                 self.products.append(contentsOf: newProducts)
-                self.last = lastDocument
-                
-                print("[⚠️] lastDocument \(String(describing: lastDocument))")
-                
+                if let lastDocument {
+                    self.lastDocument = lastDocument
+                }
             } catch let error {
                 print("[⚠️] Error: \(error.localizedDescription)")
             }
