@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CoreRootView: View {
     
-    @State private var selection = 1
+    @State private var selection = 3
     @Binding var showCoreApp: Bool
 
     var body: some View {
@@ -17,22 +17,29 @@ struct CoreRootView: View {
                 
                 ProductsView()
                     .tabItem {
-                        Label("Products 1", systemImage: "star.square.on.square.fill")
+                        Label("Products 1", systemImage: "cart.fill")
                     }.tag(1)
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.blue.opacity(0.2), for: .tabBar)
                 
                 ProductsView_2()
                     .tabItem {
-                        Label("Products 2", systemImage: "star.square.on.square.fill")
+                        Label("Products 2", systemImage: "cart.fill")
                     }.tag(2)
+                    .toolbarBackground(.visible, for: .tabBar)
+                    .toolbarBackground(Color.blue.opacity(0.2), for: .tabBar)
+                
+                FavoriteView()
+                    .tabItem {
+                        Label("Favorite", systemImage: "star.square.on.square.fill")
+                    }.tag(3)
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.blue.opacity(0.2), for: .tabBar)
                 
                 ProfileView(showCoreApp: $showCoreApp)
                     .tabItem {
                         Label("Profile", systemImage: "person.fill.viewfinder")
-                    }.tag(3)
+                    }.tag(4)
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.blue.opacity(0.2), for: .tabBar)
         }

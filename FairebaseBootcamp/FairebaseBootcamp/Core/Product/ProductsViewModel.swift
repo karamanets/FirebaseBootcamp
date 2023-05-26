@@ -135,5 +135,18 @@ final class ProductsViewModel: ObservableObject {
             }
         }
     }
+    
+    ///
+    func addFavoriteProduct(productId: Int) {
+        Task {
+            do {
+                /// get user id
+                let user = try AuthManager.shared.getAuthenticatedUser()
+                try await UserManager.shared.addUserFavoriteProduct(userId: user.uid, productId: productId)
+            } catch let error {
+                print("[⚠️] Error: \(error.localizedDescription)")
+            }
+        }
+    }
 }
 

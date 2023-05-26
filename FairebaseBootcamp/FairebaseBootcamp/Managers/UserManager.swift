@@ -17,7 +17,7 @@ final class UserManager {
     private init() {}
     
     ///📌 Path to users collection
-    private let userCollection = Firestore.firestore().collection("users")
+    private let userCollection: CollectionReference = Firestore.firestore().collection("users")
     
     ///📌 Path user document with userID
     private func userDocument(userId: String) -> DocumentReference {
@@ -110,4 +110,67 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(dict as [AnyHashable: Any])
     }
     
+    //MARK: SubCollection for user
+    
+    ///📌  Add subCollection in user document use user's ID
+    private func userFavouriteProductCollection(userId: String) -> CollectionReference {
+        userDocument(userId: userId).collection("favourite_product")
+    }
+    
+    ///📌 Generate document use id
+    private func userFavouriteProductDocument(userId: String, favouriteProductId: String) -> DocumentReference {
+        userFavouriteProductCollection(userId: userId).document(favouriteProductId)
+    }
+    
+    ///📌 Add Favorite product to subCollection in collection users -> user document. Also this setUp allowed add the same product because documentID -> generate random (.document())
+    func addUserFavoriteProduct(userId: String, productId: Int) async throws {
+        /// setUp random id for Favorite product in user subCollection
+        let document = userFavouriteProductCollection(userId: userId).document()
+        /// Get ID of blanc document first
+        let documentId = document.documentID
+        
+        let data: [String: Any] = [
+            UserFavoriteModel.CodingKeys.id.rawValue : documentId,
+            UserFavoriteModel.CodingKeys.productId.rawValue : productId,
+            UserFavoriteModel.CodingKeys.date.rawValue : Timestamp()
+        ]
+        ///SetUp data in user subCollection
+        try await document.setData(data, merge: false)
+    }
+    
+    ///📌  Remove Favorite product from user subCollection
+    func removeUserFavoriteProduct(userId: String, favoriteProductId: String) async throws {
+        try await userFavouriteProductDocument(userId: userId, favouriteProductId: favoriteProductId).delete()
+    }
+    
+    ///📌
+    func getAllFavoriteUserProduct(userId: String) async throws -> [UserFavoriteModel] {
+        try await userFavouriteProductCollection(userId: userId).getAllDocumentsGeneric(as: UserFavoriteModel.self)
+    }
+}
+
+struct UserFavoriteModel: Codable {
+    let id: String
+    let productId: Int
+    let date: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case productId = "product_id"
+        case date = "date_created"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.productId = try container.decode(Int.self, forKey: .productId)
+        self.date = try container.decode(Date.self, forKey: .date)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.id, forKey: .id)
+        try container.encode(self.productId, forKey: .productId)
+        try container.encode(self.date, forKey: .date)
+    }
 }

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 struct ProductsView: View {
     
     @StateObject private var vm = ProductsViewModel()
@@ -15,8 +17,12 @@ struct ProductsView: View {
         NavigationStack {
             List {
                 ForEach(vm.products) { product in
-                    
                     ProductCell(product: product)
+                        .contextMenu {
+                            Button("Add Favourite") {
+                                vm.addFavoriteProduct(productId: product.id)
+                            }
+                        }
                     
                     if product == vm.products.last {
                         ProgressView()

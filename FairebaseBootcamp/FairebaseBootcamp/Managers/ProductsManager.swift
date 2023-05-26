@@ -30,8 +30,8 @@ final class ProductsManager {
     }
     
     ///📌 Get Single document from products collection (use codable protocol)
-    func getSingleProduct(product: Product) async throws -> Product {
-        try await productDocument(productId: String(product.id))
+    func getSingleProduct(productId: String) async throws -> Product {
+        try await productDocument(productId: productId)
             .getDocument(as: Product.self)
     }
     
