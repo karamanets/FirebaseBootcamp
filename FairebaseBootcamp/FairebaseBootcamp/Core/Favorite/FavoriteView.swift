@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Combine
 
 
 @MainActor
@@ -15,6 +15,8 @@ final class FavoriteViewModel: ObservableObject {
     @Published private(set) var product: [(favorite: UserFavoriteModel, product: Product)] = []
     
     @Published private(set) var userFavoriteProducts: [UserFavoriteModel] = []
+    
+    var cancelable = Set<AnyCancellable>()
     
     ///📌 Example 1 Download all Favorites from user subCollection
     func getFavorites_1() {
@@ -57,6 +59,32 @@ final class FavoriteViewModel: ObservableObject {
         }
     }
     
+    ///📌 Use listeners -> update all the time in real time
+    func addListenerFavorite() {
+        guard let user = try? AuthManager.shared.getAuthenticatedUser() else { return }
+        
+        ///Example 1
+//        UserManager.shared.addListenerFavoriteUserProduct(userId: user.uid) { [weak self] product in
+//            self?.userFavoriteProducts = product
+//        }
+        
+        ///Example 2
+        //UserManager.shared.addListenerFavoriteUserProductUseCustomPublisher(userId: user.uid)
+        
+        ///Example 3
+        UserManager.shared.addListenerFavoriteUserProductUseCustomPublisherGeneric(userId: user.uid)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("[⚠️] Error: \(error.localizedDescription)")
+                }
+            } receiveValue: { [weak self] product in
+                self?.userFavoriteProducts = product
+            }.store(in: &cancelable)
+    }
+    
     ///📌 Remove selected item from user subCollection Favorites
     func removeFavorite(favoriteId: String) {
         Task {
@@ -64,7 +92,7 @@ final class FavoriteViewModel: ObservableObject {
                 /// instead inject user some where
                 let user = try AuthManager.shared.getAuthenticatedUser()
                 try await UserManager.shared.removeUserFavoriteProduct(userId: user.uid, favoriteProductId: favoriteId )
-                getFavorites_2()
+                //getFavorites_2() instead listener
             } catch let error {
                 print("[⚠️] Error: \(error.localizedDescription)")
             }
@@ -75,6 +103,7 @@ final class FavoriteViewModel: ObservableObject {
 struct FavoriteView: View {
     
     @StateObject private var vm = FavoriteViewModel()
+    @State private var isAppear: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -90,8 +119,8 @@ struct FavoriteView: View {
             }
             .navigationTitle("Favorite")
         }
-        .onAppear {
-            vm.getFavorites_2()
+        .onFirstAppear {
+            vm.addListenerFavorite()
         }
     }
 }
@@ -100,5 +129,31 @@ struct FavoriteView: View {
 struct FavoriteView_Previews: PreviewProvider {
     static var previews: some View {
         FavoriteView()
+    }
+}
+
+
+//MARK: Custom modifier for -> perform onFirst time appear
+struct OnFirstAppear: ViewModifier {
+    
+    @State private var didAppear: Bool = false
+    
+    let perform: (() -> Void)?
+    
+    func body(content: Content) -> some View {
+        content
+            .onAppear {
+                if !didAppear {
+                    perform?()
+                    didAppear = true
+                }
+            }
+    }
+}
+
+extension View {
+    
+    func onFirstAppear(perform: (() -> Void)?) -> some View {
+        modifier(OnFirstAppear(perform: perform))
     }
 }

@@ -14,6 +14,7 @@
 		2C0101542A0E780700A96D8A /* AuthUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0101532A0E780700A96D8A /* AuthUserModel.swift */; };
 		2C0101562A0E8C8300A96D8A /* GoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0101552A0E8C8300A96D8A /* GoogleHelper.swift */; };
 		2C1D165A2A12598900EBCDD5 /* SighInAppleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D16592A12598900EBCDD5 /* SighInAppleHelper.swift */; };
+		2C2377012A22307B00389483 /* UserFavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2377002A22307B00389483 /* UserFavoriteModel.swift */; };
 		2C2AE16D2A0BCB9300D07F7F /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2AE16C2A0BCB9300D07F7F /* CustomButtonStyle.swift */; };
 		2C2AE1712A0BD32300D07F7F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2AE1702A0BD32300D07F7F /* RootView.swift */; };
 		2C2AE1732A0BD50400D07F7F /* SignInUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2AE1722A0BD50400D07F7F /* SignInUpView.swift */; };
@@ -59,6 +60,7 @@
 		2C0101532A0E780700A96D8A /* AuthUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserModel.swift; sourceTree = "<group>"; };
 		2C0101552A0E8C8300A96D8A /* GoogleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleHelper.swift; sourceTree = "<group>"; };
 		2C1D16592A12598900EBCDD5 /* SighInAppleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SighInAppleHelper.swift; sourceTree = "<group>"; };
+		2C2377002A22307B00389483 /* UserFavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoriteModel.swift; sourceTree = "<group>"; };
 		2C2AE16C2A0BCB9300D07F7F /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
 		2C2AE1702A0BD32300D07F7F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		2C2AE1722A0BD50400D07F7F /* SignInUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUpView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				2C377A922A20D69900207D41 /* FavoriteView.swift */,
+				2C2377002A22307B00389483 /* UserFavoriteModel.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				2C6091FD2A1696D400EEF6F8 /* DBUserModel.swift in Sources */,
 				2CE307DB2A0A99F900FB303C /* StartCoreAppView.swift in Sources */,
 				2C76DE712A0FD66800243D18 /* Utiliti.swift in Sources */,
+				2C2377012A22307B00389483 /* UserFavoriteModel.swift in Sources */,
 				2C01014B2A0E6B4300A96D8A /* GoogleViewModel.swift in Sources */,
 				2C0101542A0E780700A96D8A /* AuthUserModel.swift in Sources */,
 				2C0101562A0E8C8300A96D8A /* GoogleHelper.swift in Sources */,

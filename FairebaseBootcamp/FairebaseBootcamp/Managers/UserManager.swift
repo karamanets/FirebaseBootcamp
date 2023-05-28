@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import Combine
 
 //MARK: Created user collection and document just with AuthEmail
 
@@ -143,34 +144,90 @@ final class UserManager {
         try await userFavouriteProductDocument(userId: userId, favouriteProductId: favoriteProductId).delete()
     }
     
-    ///📌
+    ///📌 Get All favorite products from user subCollection
     func getAllFavoriteUserProduct(userId: String) async throws -> [UserFavoriteModel] {
         try await userFavouriteProductCollection(userId: userId).getAllDocumentsGeneric(as: UserFavoriteModel.self)
     }
+    
+    //MARK: Listener
+    
+    ///📌 Store listener
+    private var userFavoriteProductListener: ListenerRegistration? = nil
+    
+    ///📌 Cancel listener for favorites
+    private func removeListenerForAllFavoriteProducts() {
+        self.userFavoriteProductListener?.remove()
+    }
+    
+    ///📌 Example 1 - Add listener -> all time when data will change in firestore it will be update immediately use - completion
+    func addListenerFavoriteUserProduct(userId: String, completion: @escaping (_ product: [UserFavoriteModel] ) -> Void) {
+        self.userFavoriteProductListener = userFavouriteProductCollection(userId: userId).addSnapshotListener { querySnapshot, error in
+            guard let document = querySnapshot?.documents else {
+                print("[⚠️] Error: no data")
+                return
+            }
+            let product: [UserFavoriteModel] = document.compactMap({ try? $0.data(as: UserFavoriteModel.self) })
+            completion(product)
+            
+            /// Get real-time access
+            querySnapshot?.documentChanges.forEach { diff in
+                if (diff.type == .added) {
+                    print("[🔥] New Product \(diff.document.data())")
+                }
+                if (diff.type == .modified) {
+                    print("[🔥] Modified Product \(diff.document.data())")
+                }
+                if (diff.type == .removed) {
+                    print("[🔥] Removed Product \(diff.document.data())")
+                }
+            }
+        }
+    }
+    
+ 
+    ///📌 Example 2 - Add listener -> all time when data will change in firestore it will be update immediately use - Publisher instead completion
+    func addListenerFavoriteUserProductUseCustomPublisher(userId: String) -> AnyPublisher<[UserFavoriteModel], Error> {
+        
+        let publisher = PassthroughSubject<[UserFavoriteModel], Error>()
+        
+        self.userFavoriteProductListener = userFavouriteProductCollection(userId: userId).addSnapshotListener { querySnapshot, error in
+            guard let document = querySnapshot?.documents else {
+                print("[⚠️] Error: no data")
+                return
+            }
+            let product: [UserFavoriteModel] = document.compactMap({ try? $0.data(as: UserFavoriteModel.self) })
+            publisher.send(product)
+        }
+        return publisher.eraseToAnyPublisher()
+    }
+    
+    ///📌 Example 3 - Add listener -> all time when data will change in firestore it will be update immediately use - Publisher generic
+    func addListenerFavoriteUserProductUseCustomPublisherGeneric(userId: String) -> AnyPublisher<[UserFavoriteModel], Error> {
+        
+        let (publisher, listener) = userFavouriteProductCollection(userId: userId)
+            .addSnapshotListenerGeneric(as: UserFavoriteModel.self)
+        
+        self.userFavoriteProductListener = listener
+        return publisher
+    }
 }
 
-struct UserFavoriteModel: Codable {
-    let id: String
-    let productId: Int
-    let date: Date
+extension Query {
     
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case productId = "product_id"
-        case date = "date_created"
+    ///📌 Generic for any type Listener
+    func addSnapshotListenerGeneric<T>(as type: T.Type) -> (AnyPublisher<[T], Error>, listener: ListenerRegistration) where T: Decodable {
+        
+        let publisher = PassthroughSubject<[T], Error>()
+        
+        let listener = self.addSnapshotListener { querySnapshot, error in
+            guard let document = querySnapshot?.documents else {
+                print("[⚠️] Error: no data")
+                return
+            }
+            let product: [T] = document.compactMap({ try? $0.data(as: T.self) })
+            publisher.send(product)
+        }
+        return (publisher.eraseToAnyPublisher(), listener)
     }
     
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
-        self.productId = try container.decode(Int.self, forKey: .productId)
-        self.date = try container.decode(Date.self, forKey: .date)
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.id, forKey: .id)
-        try container.encode(self.productId, forKey: .productId)
-        try container.encode(self.date, forKey: .date)
-    }
 }
