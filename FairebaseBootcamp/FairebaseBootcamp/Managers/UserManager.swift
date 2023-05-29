@@ -63,7 +63,8 @@ final class UserManager {
         
         ///Key must be the same lake encoder
         let data: [String: Any] = [
-            DBUserModel.CodingKeys.isPremium.rawValue : isPremium
+            DBUserModel.CodingKeys.isPremium.rawValue : isPremium,
+            //"custom_key" : "777" // for firestore rile
         ]
         try await userDocument(userId: userId).updateData(data)
     }
