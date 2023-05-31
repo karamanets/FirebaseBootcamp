@@ -24,6 +24,8 @@ struct DBUserModel: Codable {
     var isPremium: Bool?
     let preference: [String]?
     let game: Games? /// Add custom type
+    let profileImagePath: String?
+    let profileImagePathUrl: String?
     
     ///📌 inject with Auth
     init(auth: AuthUserModel) {
@@ -35,6 +37,8 @@ struct DBUserModel: Codable {
         self.isPremium = false
         self.preference = nil
         self.game = nil
+        self.profileImagePath = nil
+        self.profileImagePathUrl = nil
     }
     
     ///📌 init with user ID
@@ -46,7 +50,9 @@ struct DBUserModel: Codable {
     dateCreated: Date? = nil,
     isPremium: Bool? = nil,
     preference: [String]? = nil,
-    game: Games? = nil
+    game: Games? = nil,
+    profileImagePath: String? = nil,
+    profileImagePathUrl: String? = nil
     ) {
         self.userId = userId
         self.isAnon = isAnon
@@ -56,6 +62,8 @@ struct DBUserModel: Codable {
         self.isPremium = isPremium
         self.preference = preference
         self.game = game
+        self.profileImagePath = profileImagePath
+        self.profileImagePathUrl = profileImagePathUrl
     }
     
     //MARK: Methods
@@ -75,6 +83,8 @@ struct DBUserModel: Codable {
         case isPremium = "is_premium"
         case preference = "preference"
         case game = "game"
+        case profileImagePath = "profile_image_path"
+        case profileImagePathUrl = "profile_image_path_url"
     }
     
     init(from decoder: Decoder) throws {
@@ -87,6 +97,8 @@ struct DBUserModel: Codable {
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
         self.preference = try container.decodeIfPresent([String].self, forKey: .preference)
         self.game = try container.decodeIfPresent(Games.self, forKey: .game)
+        self.profileImagePath = try container.decodeIfPresent(String.self, forKey: .profileImagePath)
+        self.profileImagePathUrl = try container.decodeIfPresent(String.self, forKey: .profileImagePathUrl)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -99,5 +111,7 @@ struct DBUserModel: Codable {
         try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
         try container.encodeIfPresent(self.preference, forKey: .preference)
         try container.encodeIfPresent(self.game, forKey: .game)
+        try container.encodeIfPresent(self.profileImagePath, forKey: .profileImagePath)
+        try container.encodeIfPresent(self.profileImagePathUrl, forKey: .profileImagePathUrl)
     }
 }

@@ -52,6 +52,10 @@
 		2CE58F4B2A0A8064008682B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CE58F4A2A0A8064008682B4 /* GoogleService-Info.plist */; };
 		2CE58F4E2A0A80E7008682B4 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2CE58F4D2A0A80E7008682B4 /* FirebaseAnalytics */; };
 		2CE58F502A0A80E7008682B4 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2CE58F4F2A0A80E7008682B4 /* FirebaseAnalyticsSwift */; };
+		2CEF399B2A261E580088513D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2CEF399A2A261E580088513D /* FirebaseStorage */; };
+		2CEF399D2A261F1B0088513D /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF399C2A261F1B0088513D /* StorageManager.swift */; };
+		2CEF39A02A2625080088513D /* StorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF399F2A2625080088513D /* StorageView.swift */; };
+		2CEF39A22A2627DF0088513D /* StorageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF39A12A2627DF0088513D /* StorageViewModel.swift */; };
 		2CF794332A24FBDF00FD55EC /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF794322A24FBDF00FD55EC /* Rules.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +100,9 @@
 		2CE58F432A0A7ED1008682B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2CE58F4A2A0A8064008682B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2CE58F522A0A823D008682B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CEF399C2A261F1B0088513D /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		2CEF399F2A2625080088513D /* StorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageView.swift; sourceTree = "<group>"; };
+		2CEF39A12A2627DF0088513D /* StorageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageViewModel.swift; sourceTree = "<group>"; };
 		2CF794322A24FBDF00FD55EC /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +116,7 @@
 				2C01013E2A0E644000A96D8A /* GoogleSignIn in Frameworks */,
 				2C6091EE2A165B6300EEF6F8 /* FirebaseFirestoreSwift in Frameworks */,
 				2CE307CF2A0A88B400FB303C /* FirebaseAuth in Frameworks */,
+				2CEF399B2A261E580088513D /* FirebaseStorage in Frameworks */,
 				2CE58F4E2A0A80E7008682B4 /* FirebaseAnalytics in Frameworks */,
 				2C6091EC2A165B5000EEF6F8 /* FirebaseFirestore in Frameworks */,
 			);
@@ -178,6 +186,7 @@
 				2CD9B37B2A1B8E6400B1394A /* Product */,
 				2C6091F22A1668A400EEF6F8 /* Profile */,
 				2C377A912A20D68A00207D41 /* Favorite */,
+				2CEF399E2A2624C80088513D /* StorageImages */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -197,6 +206,7 @@
 				2CE307DE2A0A9C1B00FB303C /* AuthManager.swift */,
 				2C6091F92A168C4F00EEF6F8 /* UserManager.swift */,
 				2CD9B3812A1B962D00B1394A /* ProductsManager.swift */,
+				2CEF399C2A261F1B0088513D /* StorageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -300,6 +310,15 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		2CEF399E2A2624C80088513D /* StorageImages */ = {
+			isa = PBXGroup;
+			children = (
+				2CEF399F2A2625080088513D /* StorageView.swift */,
+				2CEF39A12A2627DF0088513D /* StorageViewModel.swift */,
+			);
+			path = StorageImages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -324,6 +343,7 @@
 				2C01013F2A0E644000A96D8A /* GoogleSignInSwift */,
 				2C6091EB2A165B5000EEF6F8 /* FirebaseFirestore */,
 				2C6091ED2A165B6300EEF6F8 /* FirebaseFirestoreSwift */,
+				2CEF399A2A261E580088513D /* FirebaseStorage */,
 			);
 			productName = FairebaseBootcamp;
 			productReference = 2CE58F392A0A7ED1008682B4 /* FairebaseBootcamp.app */;
@@ -386,6 +406,7 @@
 			files = (
 				2CD9B3802A1B8F1400B1394A /* ProductsView.swift in Sources */,
 				2C2AE1732A0BD50400D07F7F /* SignInUpView.swift in Sources */,
+				2CEF39A02A2625080088513D /* StorageView.swift in Sources */,
 				2C6091F62A16748900EEF6F8 /* ProfileViewMode.swift in Sources */,
 				2CD9B3822A1B962D00B1394A /* ProductsManager.swift in Sources */,
 				2C7C787B2A13B43F00F8D11B /* SignInView_Profile.swift in Sources */,
@@ -393,10 +414,12 @@
 				2CD9B37D2A1B8E8B00B1394A /* ProductModel.swift in Sources */,
 				2C7C787D2A13B93C00F8D11B /* SignInView_Anon.swift in Sources */,
 				2C7C78772A13AF9500F8D11B /* SignInViewModel_Anon.swift in Sources */,
+				2CEF399D2A261F1B0088513D /* StorageManager.swift in Sources */,
 				2CE307D22A0A8C1100FB303C /* TextFieldStyle.swift in Sources */,
 				2CD9B3862A1BAAD000B1394A /* ProductCell.swift in Sources */,
 				2CE307DF2A0A9C1B00FB303C /* AuthManager.swift in Sources */,
 				2CE307D92A0A95A500FB303C /* SignInEmailViewModel.swift in Sources */,
+				2CEF39A22A2627DF0088513D /* StorageViewModel.swift in Sources */,
 				2C0101472A0E6A0F00A96D8A /* GoogleSignIn.swift in Sources */,
 				2C377A952A21013700207D41 /* ProductCellViewBuilder.swift in Sources */,
 				2CE58F3F2A0A7ED1008682B4 /* SignInEmailRoot.swift in Sources */,
@@ -673,6 +696,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2CE58F4C2A0A80E7008682B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsSwift;
+		};
+		2CEF399A2A261E580088513D /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CE58F4C2A0A80E7008682B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

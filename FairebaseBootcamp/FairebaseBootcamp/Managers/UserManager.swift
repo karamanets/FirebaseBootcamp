@@ -69,6 +69,26 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(data)
     }
     
+    ///📌 Add imagePath from FirebaseStorage to user profile
+    func updateUserImagePath(userId: String, path: String?) async throws {
+        
+        ///Key must be the same lake encoder
+        let data: [String: Any] = [
+            DBUserModel.CodingKeys.profileImagePath.rawValue : path as Any,
+        ]
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
+    ///📌   Add imageURL from FirebaseStorage to user profile
+    func updateUserImageUrl(userId: String, url: String?) async throws {
+        
+        ///Key must be the same lake encoder
+        let data: [String: Any] = [
+            DBUserModel.CodingKeys.profileImagePathUrl.rawValue : url as Any,
+        ]
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
     ///📌 Update data Array (append) new Element
     func updatePreferenceArray(userId: String, preference: String) async throws {
         
