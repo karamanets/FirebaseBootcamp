@@ -1,6 +1,6 @@
 
 <!--- TOP ---> 
-<h2 align="center">    <a href="https://github.com/karamanets/Tip" target="_blank">  Firebase registration </a>:iphone:
+<h2 align="center">    <a href="https://github.com/karamanets/Tip" target="_blank">  Firebase Bootcamp </a>:iphone:
   
 <!--- leading for body ---> 
 <h5 align="lefth">
