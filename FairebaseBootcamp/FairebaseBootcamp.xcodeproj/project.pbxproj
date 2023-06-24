@@ -37,6 +37,7 @@
 		2C896BE02A289226007FDBD1 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2C896BDF2A289226007FDBD1 /* FirebaseCrashlytics */; };
 		2C896BE62A289490007FDBD1 /* CrashlyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C896BE52A289490007FDBD1 /* CrashlyticsView.swift */; };
 		2C896BE82A289B8A007FDBD1 /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C896BE72A289B8A007FDBD1 /* CrashManager.swift */; };
+		2C896BEA2A28B40B007FDBD1 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 2C896BE92A28B40B007FDBD1 /* FirebasePerformance */; };
 		2C8B3C212A1E4852000A5503 /* ProductsView_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B3C202A1E4852000A5503 /* ProductsView_2.swift */; };
 		2CD9B37D2A1B8E8B00B1394A /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B37C2A1B8E8A00B1394A /* ProductModel.swift */; };
 		2CD9B3802A1B8F1400B1394A /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B37F2A1B8F1400B1394A /* ProductsView.swift */; };
@@ -118,6 +119,7 @@
 			files = (
 				2C0101402A0E644000A96D8A /* GoogleSignInSwift in Frameworks */,
 				2CE58F502A0A80E7008682B4 /* FirebaseAnalyticsSwift in Frameworks */,
+				2C896BEA2A28B40B007FDBD1 /* FirebasePerformance in Frameworks */,
 				2C01013E2A0E644000A96D8A /* GoogleSignIn in Frameworks */,
 				2C6091EE2A165B6300EEF6F8 /* FirebaseFirestoreSwift in Frameworks */,
 				2CE307CF2A0A88B400FB303C /* FirebaseAuth in Frameworks */,
@@ -214,7 +216,6 @@
 				2C6091F92A168C4F00EEF6F8 /* UserManager.swift */,
 				2CD9B3812A1B962D00B1394A /* ProductsManager.swift */,
 				2CEF399C2A261F1B0088513D /* StorageManager.swift */,
-				2C896BE72A289B8A007FDBD1 /* CrashManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -242,6 +243,7 @@
 		2C896BE22A289445007FDBD1 /* Crashlytics */ = {
 			isa = PBXGroup;
 			children = (
+				2C896BE72A289B8A007FDBD1 /* CrashManager.swift */,
 				2C896BE52A289490007FDBD1 /* CrashlyticsView.swift */,
 			);
 			path = Crashlytics;
@@ -362,6 +364,7 @@
 				2C6091ED2A165B6300EEF6F8 /* FirebaseFirestoreSwift */,
 				2CEF399A2A261E580088513D /* FirebaseStorage */,
 				2C896BDF2A289226007FDBD1 /* FirebaseCrashlytics */,
+				2C896BE92A28B40B007FDBD1 /* FirebasePerformance */,
 			);
 			productName = FairebaseBootcamp;
 			productReference = 2CE58F392A0A7ED1008682B4 /* FairebaseBootcamp.app */;
@@ -729,6 +732,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2CE58F4C2A0A80E7008682B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		2C896BE92A28B40B007FDBD1 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CE58F4C2A0A80E7008682B4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
 		};
 		2CE307CE2A0A88B400FB303C /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

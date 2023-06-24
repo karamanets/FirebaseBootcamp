@@ -22,7 +22,7 @@ struct ProductCellViewBuilder: View {
         .task {
             do {
                 self.product = try await ProductsManager.shared.getSingleProduct(productId: productId)
-            } catch let error {
+            } catch {
                 print("[⚠️] Error: \(error.localizedDescription)")
             }
         }

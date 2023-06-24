@@ -33,7 +33,7 @@ final class StorageViewModel: ObservableObject {
                         self.image = Image(uiImage: uiImage)
                     }
                 }
-            } catch let error {
+            } catch {
                 print("[⚠️] Error: \(error.localizedDescription)")
                 self.image = nil
             }
@@ -62,7 +62,7 @@ final class StorageViewModel: ObservableObject {
                 ///Save image use URL -> instead Path for example
                 try await UserManager.shared.updateUserImageUrl(userId: user.uid, url: url.absoluteString)
                 
-            } catch let error {
+            } catch {
                 print("[⚠️] Error: \(error.localizedDescription)")
             }
         }
@@ -81,7 +81,7 @@ final class StorageViewModel: ObservableObject {
                 if let path = user.profileImagePath {
                     downloadImage = try await StorageManager.shared.getImage(userId: userId.uid, path: path)
                 }
-            } catch let error {
+            } catch {
                 print("[⚠️] Error: \(error.localizedDescription)")
             }
         }
@@ -101,7 +101,7 @@ final class StorageViewModel: ObservableObject {
                     imageUrl = URL(string: url)
                 }
                 
-            } catch let error {
+            } catch {
                 print("[⚠️] Error: \(error.localizedDescription)")
             }
         }
@@ -132,7 +132,7 @@ final class StorageViewModel: ObservableObject {
                     imageSelection = nil
                     downloadImage = nil
                 }
-            } catch let error {
+            } catch {
                 print("[⚠️] Error: \(error.localizedDescription)")
             }
         }

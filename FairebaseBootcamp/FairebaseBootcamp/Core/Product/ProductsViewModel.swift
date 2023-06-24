@@ -20,7 +20,6 @@ final class ProductsViewModel: ObservableObject {
     ///📌 Download same random data from (dummyjson) and then upload this data to firestore
     func downloadProductsAndUploadFirebase() {
         guard let url = URL(string: "https://dummyjson.com/products") else { return }
-        
         Task {
             do {
                 let (data, response) = try await URLSession.shared.data(from: url)
@@ -36,13 +35,10 @@ final class ProductsViewModel: ObservableObject {
                     try? await ProductsManager.shared.uploadProduct(product: product)
                 }
                 
-                print("[⚠️] download products: \(products.products.count)")
-                
-            } catch let error {
+            } catch {
                 print("[⚠️] Error: \(error.localizedDescription)")
             }
         }
-        
     }
     
     //MARK: Filters
@@ -112,7 +108,7 @@ final class ProductsViewModel: ObservableObject {
                     self.lastDocument = lastDocument
                 }
                 
-            } catch let error {
+            } catch {
                 print("[⚠️] Error: \(error.localizedDescription)")
             }
         }
@@ -130,20 +126,20 @@ final class ProductsViewModel: ObservableObject {
                 if let lastDocument {
                     self.lastDocument = lastDocument
                 }
-            } catch let error {
+            } catch {
                 print("[⚠️] Error: \(error.localizedDescription)")
             }
         }
     }
     
-    ///
+    ///📌 Add Favorite product
     func addFavoriteProduct(productId: Int) {
         Task {
             do {
                 /// get user id
                 let user = try AuthManager.shared.getAuthenticatedUser()
                 try await UserManager.shared.addUserFavoriteProduct(userId: user.uid, productId: productId)
-            } catch let error {
+            } catch {
                 print("[⚠️] Error: \(error.localizedDescription)")
             }
         }

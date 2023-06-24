@@ -22,9 +22,9 @@ struct CoreRootView: View {
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.blue.opacity(0.2), for: .tabBar)
                 
-                ProductsView_2()
+                StorageView()
                     .tabItem {
-                        Label("Products 2", systemImage: "cart.fill")
+                        Label("Storage", systemImage: "server.rack")
                     }.tag(2)
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.blue.opacity(0.2), for: .tabBar)
@@ -43,9 +43,9 @@ struct CoreRootView: View {
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.blue.opacity(0.2), for: .tabBar)
                 
-                StorageView()
+                ProductsView_2()
                     .tabItem {
-                        Label("Storage", systemImage: "server.rack")
+                        Label("Products 2", systemImage: "cart.fill")
                     }.tag(5)
                     .toolbarBackground(.visible, for: .tabBar)
                     .toolbarBackground(Color.blue.opacity(0.2), for: .tabBar)
