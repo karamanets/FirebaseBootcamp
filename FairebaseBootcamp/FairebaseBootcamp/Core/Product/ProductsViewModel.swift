@@ -109,7 +109,7 @@ final class ProductsViewModel: ObservableObject {
                 }
                 
             } catch {
-                print("[⚠️] Error: \(error.localizedDescription)")
+                print("[⚠️] Error: \(error)")
             }
         }
     }
@@ -127,7 +127,7 @@ final class ProductsViewModel: ObservableObject {
                     self.lastDocument = lastDocument
                 }
             } catch {
-                print("[⚠️] Error: \(error.localizedDescription)")
+                print("[⚠️] Error: \(error)")
             }
         }
     }

@@ -21,7 +21,7 @@ struct SignInView_Anon: View {
                                 vm.isSignIn = true
                             }
                         } catch let error {
-                            print("[⚠️] Error: \(error.localizedDescription)")
+                            print("[⚠️] Error: \(error)")
                         }
                     }
                 } label: { buttonView }

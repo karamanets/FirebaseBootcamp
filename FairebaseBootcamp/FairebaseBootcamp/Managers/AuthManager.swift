@@ -44,6 +44,12 @@ final class AuthManager {
        try Auth.auth().signOut()
     }
     
+    ///📌 Check exist user for this email or not
+    func checkUserExistsInAuthentication(email: String) async throws -> Bool {
+        let result = try await Auth.auth().fetchSignInMethods(forEmail: email)
+        return result.count > 0
+    }
+    
     ///📌  Reset Password
     func resetPassword(email: String) async throws {
         try await Auth.auth().sendPasswordReset(withEmail: email)

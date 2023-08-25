@@ -204,7 +204,6 @@ final class UserManager {
             }
         }
     }
-    
  
     ///📌 Example 2 - Add listener -> all time when data will change in firestore it will be update immediately use - Publisher instead completion
     func addListenerFavoriteUserProductUseCustomPublisher(userId: String) -> AnyPublisher<[UserFavoriteModel], Error> {

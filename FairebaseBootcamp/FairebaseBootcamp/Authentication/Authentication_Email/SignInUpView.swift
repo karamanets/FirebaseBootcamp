@@ -23,8 +23,8 @@ struct SignInUpView: View {
                     do {
                         try await vm.signUp()
                         return
-                    } catch let error {
-                        print("[⚠️] Error: \(error.localizedDescription)")
+                    } catch {
+                        print("[⚠️] Error: \(error)")
                     }
                 }
                 /// If email exist in firebase -> signIn
@@ -35,8 +35,8 @@ struct SignInUpView: View {
                             guard vm.user != nil else { return }
                             vm.isSignIn = true
                         }
-                    } catch let error {
-                        print("[⚠️] Error: \(error.localizedDescription)")
+                    } catch {
+                        print("[⚠️] Error: \(error)")
                     }
                 }
             } label: { buttonView }
