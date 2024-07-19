@@ -9,6 +9,13 @@ import Foundation
 import Firebase
 
 //MARK: - 🔥 Model
+
+
+
+
+
+
+
 struct AuthUserModel {
     
     let uid: String
@@ -27,3 +34,11 @@ struct AuthUserModel {
         ///...
     }
 }
+
+
+
+
+
+
+
+

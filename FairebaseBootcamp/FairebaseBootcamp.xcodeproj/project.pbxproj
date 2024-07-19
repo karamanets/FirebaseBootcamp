@@ -39,6 +39,8 @@
 		2C896BE82A289B8A007FDBD1 /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C896BE72A289B8A007FDBD1 /* CrashManager.swift */; };
 		2C896BEA2A28B40B007FDBD1 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 2C896BE92A28B40B007FDBD1 /* FirebasePerformance */; };
 		2C8B3C212A1E4852000A5503 /* ProductsView_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8B3C202A1E4852000A5503 /* ProductsView_2.swift */; };
+		2CD6FDF92C4A5C21007C6298 /* Start_init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6FDF72C4A5C20007C6298 /* Start_init.swift */; };
+		2CD6FDFA2C4A5C21007C6298 /* FirebaseRuls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD6FDF82C4A5C21007C6298 /* FirebaseRuls.swift */; };
 		2CD9B37D2A1B8E8B00B1394A /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B37C2A1B8E8A00B1394A /* ProductModel.swift */; };
 		2CD9B3802A1B8F1400B1394A /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B37F2A1B8F1400B1394A /* ProductsView.swift */; };
 		2CD9B3822A1B962D00B1394A /* ProductsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B3812A1B962D00B1394A /* ProductsManager.swift */; };
@@ -90,6 +92,8 @@
 		2C896BE52A289490007FDBD1 /* CrashlyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashlyticsView.swift; sourceTree = "<group>"; };
 		2C896BE72A289B8A007FDBD1 /* CrashManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
 		2C8B3C202A1E4852000A5503 /* ProductsView_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView_2.swift; sourceTree = "<group>"; };
+		2CD6FDF72C4A5C20007C6298 /* Start_init.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Start_init.swift; path = "../../../../../../Documents/Job/Xcode/Lessons /SwiftUI/Library/Library Mass/LibrarySnip/LibrarySnip/Swift/Firebase/Start_init.swift"; sourceTree = "<group>"; };
+		2CD6FDF82C4A5C21007C6298 /* FirebaseRuls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseRuls.swift; path = "../../../../../../Documents/Job/Xcode/Lessons /SwiftUI/Library/Library Mass/LibrarySnip/LibrarySnip/Swift/Firebase/FirebaseRuls.swift"; sourceTree = "<group>"; };
 		2CD9B37C2A1B8E8A00B1394A /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		2CD9B37F2A1B8F1400B1394A /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
 		2CD9B3812A1B962D00B1394A /* ProductsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsManager.swift; sourceTree = "<group>"; };
@@ -249,6 +253,15 @@
 			path = Crashlytics;
 			sourceTree = "<group>";
 		};
+		2CD6FDF62C4A5BA8007C6298 /* Else */ = {
+			isa = PBXGroup;
+			children = (
+				2CD6FDF82C4A5C21007C6298 /* FirebaseRuls.swift */,
+				2CD6FDF72C4A5C20007C6298 /* Start_init.swift */,
+			);
+			path = Else;
+			sourceTree = "<group>";
+		};
 		2CD9B37B2A1B8E6400B1394A /* Product */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +317,7 @@
 				2C6091F82A168B6200EEF6F8 /* Managers */,
 				2C0101422A0E665000A96D8A /* Authentication */,
 				2C6091EF2A165DB600EEF6F8 /* Core */,
+				2CD6FDF62C4A5BA8007C6298 /* Else */,
 			);
 			path = FairebaseBootcamp;
 			sourceTree = "<group>";
@@ -469,6 +483,7 @@
 				2CE58F3F2A0A7ED1008682B4 /* SignInEmailRoot.swift in Sources */,
 				2C8B3C212A1E4852000A5503 /* ProductsView_2.swift in Sources */,
 				2C377A932A20D69900207D41 /* FavoriteView.swift in Sources */,
+				2CD6FDF92C4A5C21007C6298 /* Start_init.swift in Sources */,
 				2C7C78752A13AF0800F8D11B /* SignInViewRoot.swift in Sources */,
 				2C6091F12A16611700EEF6F8 /* CoreRootView.swift in Sources */,
 				2C1D165A2A12598900EBCDD5 /* SighInAppleHelper.swift in Sources */,
@@ -483,6 +498,7 @@
 				2C6091FD2A1696D400EEF6F8 /* DBUserModel.swift in Sources */,
 				2CF794332A24FBDF00FD55EC /* Rules.swift in Sources */,
 				2CE307DB2A0A99F900FB303C /* StartCoreAppView.swift in Sources */,
+				2CD6FDFA2C4A5C21007C6298 /* FirebaseRuls.swift in Sources */,
 				2C76DE712A0FD66800243D18 /* Utiliti.swift in Sources */,
 				2C2377012A22307B00389483 /* UserFavoriteModel.swift in Sources */,
 				2C01014B2A0E6B4300A96D8A /* GoogleViewModel.swift in Sources */,
